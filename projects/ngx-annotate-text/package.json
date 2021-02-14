@@ -1,11 +1,29 @@
 {
   "name": "ngx-annotate-text",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "author": "Philipp Perez, (https://philenius.github.io)",
+  "description": "An Angular component library for interactively highlighting / annotating parts of text. ",
   "peerDependencies": {
     "@angular/common": "^10.1.6",
     "@angular/core": "^10.1.6"
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "keywords": [
+    "Angular",
+    "TypeScript library",
+    "Angular component",
+    "annotation tool",
+    "annotate text",
+    "mark entities"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philenius/ngx-annotate-text.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philenius/ngx-annotate-text/issues"
+  },
+  "homepage": "https://github.com/philenius/ngx-annotate-text#readme"
 }
