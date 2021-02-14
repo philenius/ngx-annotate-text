@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxAnnotateTextModule } from 'ngx-annotate-text';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     NgbModule,
+    NgxAnnotateTextModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
