@@ -15,8 +15,10 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   /** An optional CSS class applied to all elements which wrap the annotated parts of the given text. */
   @Input() annotationClass: string;
 
-  /** Determines whether annotations shall have a small button in the top right corner so that the user can
-   * remove an annotation. */
+  /**
+   * Determines whether annotations shall have a small button in the top right corner so that the user can
+   * remove an annotation.
+   */
   @Input() removable = true;
 
   /** The text / whole sentence which shall be displayed. */

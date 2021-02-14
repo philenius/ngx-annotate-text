@@ -15,7 +15,7 @@ export class Annotation implements IAnnotation, ISelection {
 
     /**
      * Represents an annotated part of the referenced text.
-     * 
+     *
      * @param startIndex The zero-based index number indicating the beginning of this annotation.
      * @param endIndex The zero-based index number indicating the end of the annotation. The annotation
      * includes the characters up to, but not including, the character indicated by the end.
