@@ -119,6 +119,46 @@
           }
         }
       }
+    },
+    "ngx-annotate-text": {
+      "projectType": "library",
+      "root": "projects/ngx-annotate-text",
+      "sourceRoot": "projects/ngx-annotate-text/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ngx-annotate-text/tsconfig.lib.json",
+            "project": "projects/ngx-annotate-text/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-annotate-text/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-annotate-text/src/test.ts",
+            "tsConfig": "projects/ngx-annotate-text/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-annotate-text/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-annotate-text/tsconfig.lib.json",
+              "projects/ngx-annotate-text/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ngx-annotate-text-workspace"
 }
