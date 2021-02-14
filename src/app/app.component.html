@@ -5,7 +5,7 @@
     <h1 class="mb-5 display-4">ngx-annotate-text demo</h1>
 
     <ngx-annotate-text [(annotations)]="annotations" [removable]="true" [text]="text" annotationClass="my-annotation"
-      #annotate>
+      #annotateText>
     </ngx-annotate-text>
 
   </div>
@@ -28,7 +28,7 @@
     <h2 class="mb-3 display-5">Annotations</h2>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let a of annotations">start: {{ a.startIndex }}, end: {{ a.endIndex }}, text:
-        "{{ a.text }}"</li>
+        "{{ a.text }}", label: {{ a.label }}</li>
     </ul>
 
   </div>

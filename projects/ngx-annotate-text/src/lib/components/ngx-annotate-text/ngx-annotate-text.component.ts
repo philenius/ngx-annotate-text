@@ -10,7 +10,7 @@ import { ISelection } from '../../models/selection.model';
 export class NgxAnnotateTextComponent implements OnInit, OnChanges {
 
   /** Represents the parts of the given text which shall be annotated. */
-  @Input() annotations: Annotation[];
+  @Input() annotations: Annotation[] = [];
 
   /** An optional CSS class applied to all elements which wrap the annotated parts of the given text. */
   @Input() annotationClass: string;
