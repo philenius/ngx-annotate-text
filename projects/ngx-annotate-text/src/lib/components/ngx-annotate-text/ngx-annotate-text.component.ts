@@ -21,9 +21,10 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    */
   @Input() removable = true;
 
-  /** The text / whole sentence which shall be displayed. */
+  /** The text which shall be displayed and annotated. */
   @Input() text: string;
 
+  /** Emits the list of existing annotations after an element has been removed. */
   @Output() annotationsChange: EventEmitter<Annotation[]> = new EventEmitter<Annotation[]>();
 
   /** @internal */
