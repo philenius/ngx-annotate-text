@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
-import { NgxAnnotateTextComponent } from './ngx-annotate-text.component';
-
-
+import { BrowserModule } from '@angular/platform-browser';
+import { AnnotationComponent } from './components/annotation/annotation.components';
+import { NgxAnnotateTextComponent } from './components/ngx-annotate-text/ngx-annotate-text.component';
 
 @NgModule({
-  declarations: [NgxAnnotateTextComponent],
+  declarations: [
+    AnnotationComponent,
+    NgxAnnotateTextComponent,
+  ],
   imports: [
+    BrowserModule,
   ],
   exports: [NgxAnnotateTextComponent]
 })

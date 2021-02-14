@@ -1,0 +1,110 @@
+span.annotation-parent {
+    border: 2px solid;
+    border-radius: 4px;
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, .1);
+    display: block;
+    margin: 0px 6px 4px 3px;
+    min-width: 26px;
+    padding: 0;
+    white-space: normal;
+    color: rgba(0,0,0,.6);
+    font-weight: 500;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+span.annotation-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0 2px;
+    white-space: normal;
+}
+
+span.annotation-content pre {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    margin-bottom: 0;
+}
+
+span.annotation-label {
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px 8px 0 8px;
+    display: flex;
+    margin: 0;
+    line-height: 0.8rem;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+span.annotation-label::after {
+    content: attr(data-label);
+}
+
+span.annotation-button {
+    position: relative;
+    display: block;
+    height: 0;
+    width: 100%;
+}
+
+span.annotation-button span {
+    position: absolute;
+    top: -2.9rem;
+    right: 0.47rem;
+}
+
+button.remove-annotation {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    min-width: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    max-height: 16px;
+    border: none;
+    border-radius: 1000px;
+    appearance: none;
+    background-color: rgba(10, 10, 10, 0.2);
+    display: inline-block;
+    outline: 0;
+    flex-shrink: 0;
+    flex-grow: 0;
+    user-select: none;
+    cursor: pointer;
+}
+
+button.remove-annotation:hover {
+    background-color: rgba(10, 10, 10, 0.5);
+}
+
+button.remove-annotation::before, button.remove-annotation::after {
+    background-color: #fff;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform-origin: center center;
+}
+
+button.remove-annotation::after {
+    height: 50%;
+    width: 2px;
+}
+
+button.remove-annotation::before {
+    height: 2px;
+    width: 50%;
+}

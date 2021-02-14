@@ -1,0 +1,10 @@
+:host() {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    white-space: pre-wrap;
+}
+
+span.unlabeled {
+    line-height: 1.5rem;
+}
