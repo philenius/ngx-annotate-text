@@ -2,7 +2,7 @@
 
 An Angular component library for interactively highlighting / annotating parts of text.
 
-![Screenshot](./screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screenshot.png)
 
 ## Features
 
@@ -16,7 +16,7 @@ An Angular component library for interactively highlighting / annotating parts o
 
 For the demo application, please see the Angular app in `./src/app/`. Screen recording:
 
-![](./screen-recording.gif)
+![Screen recording GIF](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screen-recording.gif)
 
 ## Usage
 
@@ -121,7 +121,7 @@ For the demo application, please see the Angular app in `./src/app/`. Screen rec
 
 Run `ng build ngx-annotate-text` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-### Run linting tools
+### Running linting tools
 
 Run `ng lint ngx-annotate-text ` to execute TSLint.
 
