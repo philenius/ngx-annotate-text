@@ -1,0 +1,44 @@
+name: Build & test NPM package
+
+on:
+  push:
+    branches: [feature/ci-cd-via-github-actions]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build npm package
+        run: npm run build ngx-annotate-text --prod
+
+      - name: Run linting tools for npm package
+        run: npm run lint ngx-annotate-text
+      
+      - name: Build Angular demo app
+        run: npm run build --prod
