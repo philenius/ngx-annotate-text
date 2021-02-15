@@ -125,7 +125,9 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
       currentIndex++;
     });
 
-    this.tokens.push(buffer);
+    if (buffer.length > 0) {
+      this.tokens.push(buffer);
+    }
   }
 
 }
