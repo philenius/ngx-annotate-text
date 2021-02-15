@@ -2,14 +2,14 @@ span.annotation-parent {
     border: 2px solid;
     border-radius: 4px;
     box-shadow: 2px 4px 20px rgba(0, 0, 0, .1);
+    color: rgba(0,0,0,.6);
     display: block;
-    margin: 0px 6px 4px 3px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0 0 0.5rem 0;
     min-width: 26px;
     padding: 0;
     white-space: normal;
-    color: rgba(0,0,0,.6);
-    font-weight: 500;
-    line-height: 1.5;
     word-break: break-word;
     word-wrap: break-word;
 }
