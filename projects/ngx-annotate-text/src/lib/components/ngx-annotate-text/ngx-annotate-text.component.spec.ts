@@ -100,14 +100,14 @@ describe('NgxAnnotateTextComponent', () => {
     expect(component.tokens.length).toBe(1 + annotations.length + 1);
     expect(typeof component.tokens[0]).toBe('string');
     expect(component.tokens[0]).toBe('On August 1, we went on vacation to ');
-    
+
     expect(component.tokens[1] instanceof Annotation).toBeTrue();
     expect((component.tokens[1] as Annotation).color).toBe('#fff');
     expect((component.tokens[1] as Annotation).label).toBe('City');
     expect((component.tokens[1] as Annotation).text).toBe('Barcelona');
     expect((component.tokens[1] as Annotation).startIndex).toBe(36);
     expect((component.tokens[1] as Annotation).endIndex).toBe(45);
-    
+
     expect(typeof component.tokens[2]).toBe('string');
     expect(component.tokens[2]).toBe(', Spain. Our flight took off at 11:00 am.');
   });
@@ -266,7 +266,7 @@ describe('NgxAnnotateTextComponent', () => {
     expect(component.getCurrentTextSelection().endIndex).toBe(86);
   });
 
-  function selectTextRangeInDocument(start: number, end: number) {
+  function selectTextRangeInDocument(start: number, end: number): void {
     const node = fixture.debugElement.nativeElement.querySelector('span.unlabeled');
     const selection = window.getSelection();
     const range = document.createRange();
