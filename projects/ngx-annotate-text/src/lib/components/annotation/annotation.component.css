@@ -15,16 +15,20 @@ span.annotation-parent {
 }
 
 span.annotation-content {
+    align-items: center;
+    background-color: #fff;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    text-align: center;
     justify-content: center;
     padding: 0 2px;
+    text-align: center;
     white-space: normal;
 }
 
 span.annotation-content pre {
+    background-color: rgba(0, 0, 0, 0);
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -33,6 +37,7 @@ span.annotation-content pre {
     margin-bottom: 0;
     overflow: auto;
     box-sizing: border-box;
+    padding: 0;
 }
 
 span.annotation-label {
