@@ -27,6 +27,7 @@ jobs:
           node-version: 12.x
 
   build-and-test:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
