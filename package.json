@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadlessCustom --code-coverage"
   },
   "private": true,
   "dependencies": {
@@ -30,9 +31,9 @@
     "@angular-devkit/build-angular": "~0.1001.2",
     "@angular/cli": "~10.1.2",
     "@angular/compiler-cli": "~10.1.2",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -43,6 +44,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^10.1.0",
     "protractor": "~7.0.0",
+    "puppeteer": "^7.1.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
