@@ -7,13 +7,8 @@ on:
     branches: [master]
 
 jobs:
-  test:
+  setup:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
@@ -29,19 +24,22 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 12.x
 
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
       - name: Install dependencies
-        run: npm i
+        run: npm ci
 
-      - name: Build npm package
+      - name: Build
         run: npm run build ngx-annotate-text --prod
 
-      - name: Run linting tools for npm package
+      - name: Run linting tools
         run: npm run lint ngx-annotate-text
 
       - name: Run tests
-        run: npm run test ngx-annotate-text --code-coverage
+        run: npm run test-headless ngx-annotate-text
       
       - name: Build Angular demo app
         run: npm run build --prod
