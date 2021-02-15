@@ -2,7 +2,7 @@ name: Build & test NPM package
 
 on:
   push:
-    branches: [feature/ci-cd-via-github-actions]
+    branches: [develop,master]
   pull_request:
     branches: [master]
 
