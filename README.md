@@ -1,5 +1,7 @@
 # ngx-annotate-text
 
+<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/philenius/ngx-annotate-text/Build%20&%20test%20NPM%20package/master?style=for-the-badge"> <a href="https://github.com/philenius/ngx-annotate-text/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/philenius/ngx-annotate-text?style=for-the-badge"></a> <img alt="GitHub" src="https://img.shields.io/github/license/philenius/ngx-annotate-text?style=for-the-badge"> <img alt="npm" src="https://img.shields.io/npm/v/ngx-annotate-text?style=for-the-badge"> 
+
 An Angular component library for interactively highlighting / annotating parts of text.
 
 ![Screenshot](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screenshot.png)
