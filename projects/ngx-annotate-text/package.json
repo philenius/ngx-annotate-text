@@ -1,6 +1,6 @@
 {
   "name": "ngx-annotate-text",
-  "version": "0.1.4",
+  "version": "10.0.0",
   "author": "Philipp Perez, (https://philenius.github.io)",
   "license": "MIT",
   "description": "An Angular component library for interactively highlighting / annotating parts of text.",
