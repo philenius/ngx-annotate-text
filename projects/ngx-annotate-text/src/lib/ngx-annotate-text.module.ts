@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AnnotationComponent } from './components/annotation/annotation.components';
 import { NgxAnnotateTextComponent } from './components/ngx-annotate-text/ngx-annotate-text.component';
 
@@ -9,7 +9,7 @@ import { NgxAnnotateTextComponent } from './components/ngx-annotate-text/ngx-ann
     NgxAnnotateTextComponent,
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
   ],
   exports: [NgxAnnotateTextComponent]
 })
