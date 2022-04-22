@@ -95,15 +95,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         },
@@ -148,18 +144,19 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ngx-annotate-text/tsconfig.lib.json",
-              "projects/ngx-annotate-text/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ngx-annotate-text/**/*.ts",
+              "projects/ngx-annotate-text/**/*.html"
             ]
           }
         }
       }
-    }},
-  "defaultProject": "ngx-annotate-text-workspace"
+    }
+  },
+  "defaultProject": "ngx-annotate-text-workspace",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
