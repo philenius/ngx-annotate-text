@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
+import { TokenizerService } from '../../services/tokenizer.service';
 
 @Component({
   selector: 'ngx-annotate-text',
@@ -31,17 +32,16 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   tokens: any[] = [];
   private selectionStart: number;
   private selectionEnd: number;
-  private annotationStartingIndices: Map<number, Annotation> = new Map();
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private tokenService: TokenizerService) { }
 
   ngOnInit(): void {
-    this.splitTextIntoTokens();
+    this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('annotations' in changes || 'text' in changes) {
-      this.splitTextIntoTokens();
+      this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
     }
   }
 
@@ -71,7 +71,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   onRemoveAnnotation(annotation: Annotation): void {
     this.annotations = this.annotations.filter(a => a !== annotation);
     this.annotationsChange.emit(this.annotations);
-    this.splitTextIntoTokens();
+    this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
   }
 
   private updateTextSelection(): void {
@@ -85,48 +85,6 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
     } else {
       this.selectionStart = undefined;
       this.selectionEnd = undefined;
-    }
-  }
-
-  private splitTextIntoTokens(): void {
-    this.tokens = [];
-    this.annotationStartingIndices = new Map();
-
-    // Creates a map which contains the starting indices for each annotation
-    // as keys. This way, we know the positions / indices in the text where
-    // we need to display an annotation instead of the plaintext.
-    this.annotations.forEach((a: Annotation) => {
-      this.annotationStartingIndices.set(a.startIndex, a);
-      a.text = this.text.substring(a.startIndex, a.endIndex);
-    });
-
-    let currentIndex = 0;
-    let isAnnotationActive = false;
-    let annotationActiveUntilIndex = 0;
-    let buffer = '';
-
-    this.text.split('').forEach((char: string) => {
-      if (annotationActiveUntilIndex === currentIndex) {
-        isAnnotationActive = false;
-      }
-
-      if (!this.annotationStartingIndices.has(currentIndex) && !isAnnotationActive) {
-        buffer += char;
-      } else if (this.annotationStartingIndices.has(currentIndex)) {
-        if (buffer.length > 0) {
-          this.tokens.push(buffer);
-        }
-        this.tokens.push(this.annotationStartingIndices.get(currentIndex));
-        annotationActiveUntilIndex = this.annotationStartingIndices.get(currentIndex).endIndex;
-        buffer = '';
-        isAnnotationActive = true;
-      }
-
-      currentIndex++;
-    });
-
-    if (buffer.length > 0) {
-      this.tokens.push(buffer);
     }
   }
 
