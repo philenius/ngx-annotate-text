@@ -88,6 +88,13 @@ For the demo application, please see the Angular app in `./src/app/`. Screen rec
     }
     ```
 
+5. Having set `annotationClass="my-annotation"`, a custom CSS styling can be applied by combining `::ng-deep` with the class selector `.my-annotation`, e.g., to remove the border-radius: 
+   ```css
+   ::ng-deep .my-annotation .annotation-parent,
+   ::ng-deep .my-annotation .annotation-content {
+       border-radius: 0rem !important;
+   }
+   ```
     
 
 
