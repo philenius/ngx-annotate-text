@@ -4,6 +4,7 @@ import { ISelection } from '../../models/selection.model';
 import { TokenizerService } from '../../services/tokenizer.service';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngx-annotate-text',
   templateUrl: './ngx-annotate-text.component.html',
   styleUrls: ['./ngx-annotate-text.component.css']
@@ -14,7 +15,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   @Input() annotations: Annotation[] = [];
 
   /** An optional CSS class applied to all elements which wrap the annotated parts of the given text. */
-  @Input() annotationClass: string;
+  @Input() annotationClass?: string;
 
   /**
    * Determines whether annotations shall have a small button in the top right corner so that the user can
@@ -23,15 +24,15 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   @Input() removable = true;
 
   /** The text which shall be displayed and annotated. */
-  @Input() text: string;
+  @Input() text = '';
 
   /** Emits the list of existing annotations after an element has been removed. */
   @Output() annotationsChange: EventEmitter<Annotation[]> = new EventEmitter<Annotation[]>();
 
   /** @internal */
   tokens: any[] = [];
-  private selectionStart: number;
-  private selectionEnd: number;
+  private selectionStart?: number;
+  private selectionEnd?: number;
 
   constructor(private elementRef: ElementRef, private tokenService: TokenizerService) { }
 
@@ -49,7 +50,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    * Returns the start index and end index of the currently selected text range. Returns `undefined`
    * if no text is currently selected.
    */
-  public getCurrentTextSelection(): ISelection {
+  public getCurrentTextSelection(): ISelection | undefined {
     this.updateTextSelection();
 
     if (this.selectionStart === undefined || this.selectionEnd === undefined || this.selectionStart >= this.selectionEnd) {
@@ -75,8 +76,9 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   }
 
   private updateTextSelection(): void {
-    if (window.getSelection && window.getSelection().rangeCount > 0) {
-      const range = window.getSelection().getRangeAt(0);
+    const selection = window.getSelection();
+    if (selection != null && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
       const preSelectionRange = range.cloneRange();
       preSelectionRange.selectNodeContents(this.elementRef.nativeElement);
       preSelectionRange.setEnd(range.startContainer, range.startOffset);

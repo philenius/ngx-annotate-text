@@ -1,7 +1,7 @@
 import { ISelection } from './selection.model';
 
 export interface IAnnotation {
-    text: string;
+    text: string | undefined;
     label: string;
     color: string;
 }
@@ -9,7 +9,7 @@ export interface IAnnotation {
 export class Annotation implements IAnnotation, ISelection {
     startIndex: number;
     endIndex: number;
-    text: string;
+    text: string | undefined;
     label: string;
     color: string;
 

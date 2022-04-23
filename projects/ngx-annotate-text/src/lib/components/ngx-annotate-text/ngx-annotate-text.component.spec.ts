@@ -1,6 +1,7 @@
 import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Annotation } from 'ngx-annotate-text';
+import { Annotation } from '../../models/annotation.model';
+import { AnnotationComponent } from '../annotation/annotation.components';
 
 import { NgxAnnotateTextComponent } from './ngx-annotate-text.component';
 
@@ -10,7 +11,10 @@ describe('NgxAnnotateTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NgxAnnotateTextComponent]
+      declarations: [
+        NgxAnnotateTextComponent,
+        AnnotationComponent,
+      ]
     });
 
     fixture = TestBed.createComponent(NgxAnnotateTextComponent);
@@ -134,7 +138,7 @@ describe('NgxAnnotateTextComponent', () => {
 
     component.text = text;
     const selection = window.getSelection();
-    selection.removeAllRanges();
+    selection!.removeAllRanges();
     fixture.detectChanges();
 
     expect(component.getCurrentTextSelection()).toBeUndefined();
@@ -150,12 +154,12 @@ describe('NgxAnnotateTextComponent', () => {
     const selection = window.getSelection();
     const range = document.createRange();
     range.selectNodeContents(node);
-    selection.removeAllRanges();
-    selection.addRange(range);
+    selection!.removeAllRanges();
+    selection!.addRange(range);
     fixture.detectChanges();
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(0);
-    expect(component.getCurrentTextSelection().endIndex).toBe(text.length);
+    expect(component.getCurrentTextSelection()!.startIndex).toBe(0);
+    expect(component.getCurrentTextSelection()!.endIndex).toBe(text.length);
   });
 
   it('should return the correct boundaries if the beginning of the text is selected', () => {
@@ -167,8 +171,8 @@ describe('NgxAnnotateTextComponent', () => {
     selectTextRangeInDocument(0, 2);
     fixture.detectChanges();
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(0);
-    expect(component.getCurrentTextSelection().endIndex).toBe(2);
+    expect(component.getCurrentTextSelection()!.startIndex).toBe(0);
+    expect(component.getCurrentTextSelection()!.endIndex).toBe(2);
   });
 
   it('should return the correct boundaries if the middle of the text is selected', () => {
@@ -180,8 +184,8 @@ describe('NgxAnnotateTextComponent', () => {
     selectTextRangeInDocument(3, 11);
     fixture.detectChanges();
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(3);
-    expect(component.getCurrentTextSelection().endIndex).toBe(11);
+    expect(component.getCurrentTextSelection()!.startIndex).toBe(3);
+    expect(component.getCurrentTextSelection()!.endIndex).toBe(11);
   });
 
   it('should return the correct boundaries if the end of the text is selected', () => {
@@ -193,8 +197,8 @@ describe('NgxAnnotateTextComponent', () => {
     selectTextRangeInDocument(76, 86);
     fixture.detectChanges();
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(76);
-    expect(component.getCurrentTextSelection().endIndex).toBe(86);
+    expect(component.getCurrentTextSelection()!.startIndex).toBe(76);
+    expect(component.getCurrentTextSelection()!.endIndex).toBe(86);
   });
 
   function selectTextRangeInDocument(start: number, end: number): void {
@@ -203,7 +207,7 @@ describe('NgxAnnotateTextComponent', () => {
     const range = document.createRange();
     range.setStart(node.childNodes[0], start);
     range.setEnd(node.childNodes[0], end);
-    selection.removeAllRanges();
-    selection.addRange(range);
+    selection!.removeAllRanges();
+    selection!.addRange(range);
   }
 });
