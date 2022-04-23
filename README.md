@@ -133,7 +133,7 @@ Run `ng build ngx-annotate-text` to build the project. The build artifacts will 
 
 ### Running linting tools
 
-Run `ng lint ngx-annotate-text ` to execute TSLint.
+Run `ng lint ngx-annotate-text ` to execute ESLint.
 
 ### Running unit tests
 

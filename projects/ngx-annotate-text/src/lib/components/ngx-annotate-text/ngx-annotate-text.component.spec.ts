@@ -281,11 +281,11 @@ describe('NgxAnnotateTextComponent', () => {
     it('should return true if the selection is part of an existing annotation', () => {
       const selection: ISelection = {
         startIndex: 6,
-        endIndex: 12,
+        endIndex: 8,
       };
 
       component.annotations = [
-        new Annotation(4, 8, 'Adjective', 'orange'),
+        new Annotation(4, 10, 'Adjective', 'orange'),
       ];
 
       expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
@@ -297,12 +297,12 @@ describe('NgxAnnotateTextComponent', () => {
      */
     it('should return true if the selection is part of an existing annotation', () => {
       const selection: ISelection = {
-        startIndex: 6,
-        endIndex: 12,
+        startIndex: 4,
+        endIndex: 10,
       };
 
       component.annotations = [
-        new Annotation(4, 8, 'Adjective', 'orange'),
+        new Annotation(6, 8, 'Adjective', 'orange'),
       ];
 
       expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
