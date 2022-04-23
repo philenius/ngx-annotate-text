@@ -47,7 +47,9 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Returns the start index and end index of the currently selected text range. Returns `undefined`
+   * Provides start and end index of the currently selected text.
+   * 
+   * @returns Returns the start index and end index of the currently selected text range. Returns `undefined`
    * if no text is currently selected.
    */
   public getCurrentTextSelection(): ISelection | undefined {
@@ -61,6 +63,20 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
       startIndex: this.selectionStart,
       endIndex: this.selectionEnd,
     };
+  }
+
+  /**
+   * Checks whether the given text selection is overlapping with existing annotations.
+   * 
+   * @param selection The current text selection.
+   * @returns Returns `true` if the given text selection is (partially) overlapping with
+   * an existing annotation. Returns `false` otherwise.
+   */
+  public isOverlappingWithExistingAnnotations(selection: ISelection): boolean {
+    const overlappingAnnotation = this.annotations.find((annotation) => {
+      return Math.max(annotation.startIndex, selection.startIndex) < Math.min(annotation.endIndex, selection.endIndex);
+    });
+    return overlappingAnnotation != undefined;
   }
 
   /** @internal */

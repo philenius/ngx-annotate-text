@@ -8,8 +8,8 @@ An Angular component library for interactively highlighting / annotating parts o
 
 ## Features
 
-* :raised_hand: Interactively mark entities such as cities, numbers, dates, etc.
-* :x: Remove annotations / marked entities.
+* :point_up_2: Interactively mark entities such as cities, numbers, dates, etc.
+* :wastebasket: Interactively remove annotations / marked entities. 
 * :tada: Purely based on CSS. No magic, no canvas, and no SVGs.
 
 
@@ -95,7 +95,7 @@ For the demo application, please see the Angular app in `./src/app/`. Screen rec
        border-radius: 0rem !important;
    }
    ```
-    
+   
 
 
 
@@ -105,22 +105,23 @@ For the demo application, please see the Angular app in `./src/app/`. Screen rec
 
 | Input           | Description                                                  | Type         | Default value |
 | :-------------- | ------------------------------------------------------------ | ------------ | :------------ |
-| annotations     | Represents the parts of the given text which shall be annotated. | Annotation[] | []            |
-| annotationClass | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | string       |               |
-| removable       | Determines whether annotations shall have a small button in the top right corner so that the user can remove an annotation. | boolean      | true          |
-| text            | The text which shall be displayed and annotated.             | string       |               |
+| annotations     | Represents the parts of the given text which shall be annotated. | `Annotation[]` | `[]`            |
+| annotationClass | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | `string\|undefined`       | `undefined`               |
+| removable       | Determines whether annotations shall have a small button in the top right corner so that the user can remove an annotation. | `boolean`      | `true`           |
+| text            | The text which shall be displayed and annotated.             | `string`       | empty string              |
 
 ### Outputs
 
 | Output            | Description                                                  | Type                       |
 | ----------------- | ------------------------------------------------------------ | -------------------------- |
-| annotationsChange | Emits the list of existing annotations after an element has been removed by the user. | EventEmitter<Annotation[]> |
+| annotationsChange | Emits the list of existing annotations after an element has been removed by the user. | `EventEmitter<Annotation[]>` |
 
 ### Methods
 
-| Method                  | Description                                                  | Return type |
-| ----------------------- | ------------------------------------------------------------ | ----------- |
-| getCurrentTextSelection | Returns the start index and end index of the currently selected text range. Returns `undefined` if no text is currently selected. | ISelection  |
+| Method                               | Description                                                  | Return type |
+| ------------------------------------ | ------------------------------------------------------------ | ----------- |
+| getCurrentTextSelection              | Returns the start index and end index of the currently selected text range. Returns `undefined` if no text is currently selected. | `ISelection\|undefined` |
+| isOverlappingWithExistingAnnotations | Returns true if the given text selection is (partially) overlapping with an existing annotation. Returns false otherwise. | `boolean` |
 
 
 

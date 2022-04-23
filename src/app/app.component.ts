@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Annotation, NgxAnnotateTextComponent } from 'ngx-annotate-text';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -19,18 +20,27 @@ export class AppComponent {
   ];
 
   addAnnotation(label: string, color: string): void {
-    if (this.ngxAnnotateText) {
-      const selection = this.ngxAnnotateText.getCurrentTextSelection();
-      if (selection) {
-        this.annotations = this.annotations.concat(
-          new Annotation(
-            selection.startIndex,
-            selection.endIndex,
-            label,
-            color,
-          ),
-        );
-      }
+    if (!this.ngxAnnotateText) {
+      return;
     }
+
+    const selection = this.ngxAnnotateText.getCurrentTextSelection();
+    if (!selection) {
+      return;
+    }
+
+    if (this.ngxAnnotateText.isOverlappingWithExistingAnnotations(selection)) {
+      alert('The selected text is already annotated.');
+      return;
+    }
+
+    this.annotations = this.annotations.concat(
+      new Annotation(
+        selection.startIndex,
+        selection.endIndex,
+        label,
+        color,
+      ),
+    );
   }
 }
