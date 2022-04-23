@@ -1,6 +1,8 @@
 import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Annotation } from 'ngx-annotate-text';
+import { Annotation } from '../../models/annotation.model';
+import { ISelection } from '../../models/selection.model';
+import { AnnotationComponent } from '../annotation/annotation.components';
 
 import { NgxAnnotateTextComponent } from './ngx-annotate-text.component';
 
@@ -10,7 +12,10 @@ describe('NgxAnnotateTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NgxAnnotateTextComponent]
+      declarations: [
+        NgxAnnotateTextComponent,
+        AnnotationComponent,
+      ]
     });
 
     fixture = TestBed.createComponent(NgxAnnotateTextComponent);
@@ -129,72 +134,180 @@ describe('NgxAnnotateTextComponent', () => {
     expect((component.tokens[2] as Annotation).text).toBe('world');
   });
 
-  it('should return `undefined` if no text is selected', () => {
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+  describe('getCurrentTextSelection()', () => {
 
-    component.text = text;
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    fixture.detectChanges();
+    it('should return `undefined` if no text is selected', () => {
+      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
-    expect(component.getCurrentTextSelection()).toBeUndefined();
+      component.text = text;
+      const selection = window.getSelection();
+      selection!.removeAllRanges();
+      fixture.detectChanges();
+
+      expect(component.getCurrentTextSelection()).toBeUndefined();
+    });
+
+    it('should return the correct boundaries if the whole text is selected', () => {
+      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+
+      component.text = text;
+      fixture.detectChanges();
+
+      const node = fixture.debugElement.nativeElement.querySelector('span:first-of-type');
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      selection!.removeAllRanges();
+      selection!.addRange(range);
+      fixture.detectChanges();
+
+      expect(component.getCurrentTextSelection()!.startIndex).toBe(0);
+      expect(component.getCurrentTextSelection()!.endIndex).toBe(text.length);
+    });
+
+    it('should return the correct boundaries if the beginning of the text is selected', () => {
+      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+
+      component.text = text;
+      fixture.detectChanges();
+
+      selectTextRangeInDocument(0, 2);
+      fixture.detectChanges();
+
+      expect(component.getCurrentTextSelection()!.startIndex).toBe(0);
+      expect(component.getCurrentTextSelection()!.endIndex).toBe(2);
+    });
+
+    it('should return the correct boundaries if the middle of the text is selected', () => {
+      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+
+      component.text = text;
+      fixture.detectChanges();
+
+      selectTextRangeInDocument(3, 11);
+      fixture.detectChanges();
+
+      expect(component.getCurrentTextSelection()!.startIndex).toBe(3);
+      expect(component.getCurrentTextSelection()!.endIndex).toBe(11);
+    });
+
+    it('should return the correct boundaries if the end of the text is selected', () => {
+      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+
+      component.text = text;
+      fixture.detectChanges();
+
+      selectTextRangeInDocument(76, 86);
+      fixture.detectChanges();
+
+      expect(component.getCurrentTextSelection()!.startIndex).toBe(76);
+      expect(component.getCurrentTextSelection()!.endIndex).toBe(86);
+    });
+
   });
 
-  it('should return the correct boundaries if the whole text is selected', () => {
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+  describe('isOverlappingWithExistingAnnotations()', () => {
 
-    component.text = text;
-    fixture.detectChanges();
+    it('should return false if there is no annotation that overlaps with the selection', () => {
+      const selection: ISelection = {
+        startIndex: 5,
+        endIndex: 9,
+      };
 
-    const node = fixture.debugElement.nativeElement.querySelector('span:first-of-type');
-    const selection = window.getSelection();
-    const range = document.createRange();
-    range.selectNodeContents(node);
-    selection.removeAllRanges();
-    selection.addRange(range);
-    fixture.detectChanges();
+      component.annotations = [
+        new Annotation(0, 5, 'Article', 'yellow'),
+        new Annotation(9, 11, 'Article', 'yellow'),
+        new Annotation(16, 22, 'Article', 'yellow'),
+      ];
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(0);
-    expect(component.getCurrentTextSelection().endIndex).toBe(text.length);
-  });
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeFalse();
+    });
 
-  it('should return the correct boundaries if the beginning of the text is selected', () => {
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+    /**
+     * Annotation:  ####
+     * Selection:   ####
+     */
+    it('should return true if there exists an annotation with identical start and end index', () => {
+      const selection: ISelection = {
+        startIndex: 5,
+        endIndex: 12,
+      };
 
-    component.text = text;
-    fixture.detectChanges();
+      component.annotations = [
+        new Annotation(5, 12, 'Noun', 'blue'),
+      ];
 
-    selectTextRangeInDocument(0, 2);
-    fixture.detectChanges();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+    });
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(0);
-    expect(component.getCurrentTextSelection().endIndex).toBe(2);
-  });
+    /**
+     * Annotation:    ####
+     * Selection:   ####
+     */
+    it('should return true if the selection partially overlaps with an existing annotation', () => {
+      const selection: ISelection = {
+        startIndex: 0,
+        endIndex: 6,
+      };
 
-  it('should return the correct boundaries if the middle of the text is selected', () => {
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      component.annotations = [
+        new Annotation(4, 8, 'Verb', 'red'),
+      ];
 
-    component.text = text;
-    fixture.detectChanges();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+    });
 
-    selectTextRangeInDocument(3, 11);
-    fixture.detectChanges();
+    /**
+     * Annotation:  ####
+     * Selection:     ####
+     */
+    it('should return true if the selection partially overlaps with an existing annotation', () => {
+      const selection: ISelection = {
+        startIndex: 6,
+        endIndex: 12,
+      };
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(3);
-    expect(component.getCurrentTextSelection().endIndex).toBe(11);
-  });
+      component.annotations = [
+        new Annotation(4, 8, 'Adjective', 'orange'),
+      ];
 
-  it('should return the correct boundaries if the end of the text is selected', () => {
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+    });
 
-    component.text = text;
-    fixture.detectChanges();
+    /**
+     * Annotation:  ####
+     * Selection:    ##
+     */
+    it('should return true if the selection is part of an existing annotation', () => {
+      const selection: ISelection = {
+        startIndex: 6,
+        endIndex: 8,
+      };
 
-    selectTextRangeInDocument(76, 86);
-    fixture.detectChanges();
+      component.annotations = [
+        new Annotation(4, 10, 'Adjective', 'orange'),
+      ];
 
-    expect(component.getCurrentTextSelection().startIndex).toBe(76);
-    expect(component.getCurrentTextSelection().endIndex).toBe(86);
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+    });
+
+    /**
+     * Annotation:   ##
+     * Selection:   ####
+     */
+    it('should return true if the selection is part of an existing annotation', () => {
+      const selection: ISelection = {
+        startIndex: 4,
+        endIndex: 10,
+      };
+
+      component.annotations = [
+        new Annotation(6, 8, 'Adjective', 'orange'),
+      ];
+
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+    });
+
   });
 
   function selectTextRangeInDocument(start: number, end: number): void {
@@ -203,7 +316,7 @@ describe('NgxAnnotateTextComponent', () => {
     const range = document.createRange();
     range.setStart(node.childNodes[0], start);
     range.setEnd(node.childNodes[0], end);
-    selection.removeAllRanges();
-    selection.addRange(range);
+    selection!.removeAllRanges();
+    selection!.addRange(range);
   }
 });

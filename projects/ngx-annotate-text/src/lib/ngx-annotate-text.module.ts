@@ -11,6 +11,8 @@ import { NgxAnnotateTextComponent } from './components/ngx-annotate-text/ngx-ann
   imports: [
     CommonModule,
   ],
-  exports: [NgxAnnotateTextComponent]
+  exports: [
+    NgxAnnotateTextComponent,
+  ]
 })
 export class NgxAnnotateTextModule { }

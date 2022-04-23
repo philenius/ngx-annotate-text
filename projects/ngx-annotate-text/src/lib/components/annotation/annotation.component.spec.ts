@@ -7,20 +7,21 @@ describe('AnnotationComponent', () => {
 
   let component: AnnotationComponent;
   let fixture: ComponentFixture<AnnotationComponent>;
-  let annotationContentElement: HTMLElement;
-  let annotationLabelElement: HTMLElement;
-  let annotationParentElement: HTMLElement;
+  let getAnnotationContentElement = (): HTMLElement => fixture.nativeElement.querySelector('span.annotation-content pre');
+  let getAnnotationLabelElement = (): HTMLElement => fixture.nativeElement.querySelector('span.annotation-label');
+  let getAnnotationParentElement = (): HTMLElement => fixture.nativeElement.querySelector('span.annotation-parent');
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AnnotationComponent]
+    })
+      .compileComponents();
+  });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AnnotationComponent]
-    });
-
     fixture = TestBed.createComponent(AnnotationComponent);
     component = fixture.componentInstance;
-    annotationContentElement = fixture.nativeElement.querySelector('span.annotation-content pre');
-    annotationLabelElement = fixture.nativeElement.querySelector('span.annotation-label');
-    annotationParentElement = fixture.nativeElement.querySelector('span.annotation-parent');
+    fixture.detectChanges();
   });
 
   it('should display the text of the annotation', () => {
@@ -30,7 +31,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(annotationContentElement.textContent).toBe(annotation.text);
+    expect(getAnnotationContentElement().textContent).toBe(annotation.text);
   });
 
   it('should display the label of the annotation', () => {
@@ -40,7 +41,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(annotationLabelElement.getAttribute('data-label')).toBe(annotation.label);
+    expect(getAnnotationLabelElement().getAttribute('data-label')).toBe(annotation.label);
   });
 
   it('should set the border color of the annotation to the specified color', () => {
@@ -50,7 +51,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(annotationParentElement.style.borderColor).toBe(annotation.color);
+    expect(getAnnotationParentElement().style.borderColor).toBe(annotation.color);
   });
 
   it(`should set the background color of the annotation's label to the specified color`, () => {
@@ -60,7 +61,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(annotationLabelElement.style.backgroundColor).toBe(annotation.color);
+    expect(getAnnotationLabelElement().style.backgroundColor).toBe(annotation.color);
   });
 
   it('should display a button to remove the annotation if removable == true', () => {
