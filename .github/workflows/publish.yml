@@ -1,16 +1,14 @@
-name: Build & test NPM package
+name: Publish Package to npmjs.com
 on:
-  push:
-    branches: [develop,master]
-  pull_request:
-    branches: [master]
+  release:
+    types: [created]
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -18,15 +16,19 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
+        
       - name: Build
         run: npm run build ngx-annotate-text --configuration production
 
       - name: Lint
         run: npm run lint ngx-annotate-text
-
+        
       - name: Test
         run: npm run test-headless ngx-annotate-text
-      
-      - name: Build Angular demo app
-        run: npm run build --prod
+        
+      - name: Publish to npmjs.com
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          dry-run: true
+          package: ./dist/ngx-annotate-text/
+          token: ${{ secrets.NPM_TOKEN }}
