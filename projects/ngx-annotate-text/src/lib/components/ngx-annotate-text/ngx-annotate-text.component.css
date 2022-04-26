@@ -1,4 +1,4 @@
-:host() {
+:host {
     align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
