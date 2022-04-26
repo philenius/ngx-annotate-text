@@ -2,6 +2,9 @@
 
 <img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/philenius/ngx-annotate-text/Build%20&%20test%20NPM%20package/master?style=for-the-badge"> <a href="https://github.com/philenius/ngx-annotate-text/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/philenius/ngx-annotate-text?style=for-the-badge"></a> <img alt="GitHub" src="https://img.shields.io/github/license/philenius/ngx-annotate-text?style=for-the-badge"> <img alt="npm" src="https://img.shields.io/npm/v/ngx-annotate-text?style=for-the-badge"> 
 
+[![Edit ngx-annotate-text demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark)
+
+
 An Angular component library for interactively highlighting / annotating parts of text.
 
 ![Screenshot](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screenshot.png)
@@ -16,7 +19,15 @@ An Angular component library for interactively highlighting / annotating parts o
 
 ## Demo
 
-For the demo application, please see the Angular app in `./src/app/`. Screen recording:
+[![Edit ngx-annotate-text demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark)
+
+View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark">codesandbox.io</a> or look through the code of the demo app in [ngx-annotate-text/src/app/](https://github.com/philenius/ngx-annotate-text/tree/master/src/app).
+
+
+
+
+**Screen recording:**
+
 
 ![Screen recording GIF](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screen-recording.gif)
 
@@ -130,9 +141,20 @@ For the demo application, please see the Angular app in `./src/app/`. Screen rec
 ### Recreate project from scratch
 
 ```bash
+npm install -g @angular/cli@^13
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
+npm install bootstrap
+npm install --save-dev \
+  eslint \
+  @angular-eslint/builder \
+  @angular-eslint/eslint-plugin \
+  @angular-eslint/eslint-plugin-template \
+  @angular-eslint/schematics \
+  @angular-eslint/template-parser \
+  @typescript-eslint/eslint-plugin \
+  @typescript-eslint/parser
 ```
 
 ### Build

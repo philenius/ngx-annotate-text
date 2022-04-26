@@ -16,19 +16,36 @@
 
   <div class="col-12 mb-5">
 
-    <button type="button" class="btn btn-primary me-2" (click)="addAnnotation('Date', '#0d6efd')">Date</button>
-    <button type="button" class="btn btn-secondary me-2" (click)="addAnnotation('Time', '#6c757d')">Time</button>
-    <button type="button" class="btn btn-success me-2" (click)="addAnnotation('Country', '#198754')">Country</button>
-    <button type="button" class="btn btn-danger me-2" (click)="addAnnotation('City', '#dc3545')">City</button>
+    <button type="button" class="btn btn-primary me-2" (click)="addAnnotation('Date', '#0d6efd')">
+      Date
+    </button>
+    <button type="button" class="btn btn-secondary me-2" (click)="addAnnotation('Time', '#6c757d')">
+      Time
+    </button>
+    <button type="button" class="btn btn-success me-2" (click)="addAnnotation('Country', '#198754')">
+      Country
+    </button>
+    <button type="button" class="btn btn-danger me-2" (click)="addAnnotation('City', '#dc3545')">
+      City
+    </button>
 
   </div>
 
-  <div class="col-6">
+</div>
+
+<div class="row">
+
+  <div class="col-12">
 
     <h2 class="mb-3 display-5">Annotations</h2>
+
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let a of annotations">start: {{ a.startIndex }}, end: {{ a.endIndex }}, text:
-        "{{ a.text }}", label: {{ a.label }}</li>
+
+      <li class="list-group-item" *ngFor="let a of annotations">
+        start: {{ a.startIndex }}, end: {{ a.endIndex }}, text: "{{ a.text }}",
+        label: {{ a.label }}
+      </li>
+
     </ul>
 
   </div>
