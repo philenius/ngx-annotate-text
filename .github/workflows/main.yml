@@ -20,7 +20,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build ngx-annotate-text --configuration production
+        run: npm run build ngx-annotate-text '--configuration production'
 
       - name: Lint
         run: npm run lint ngx-annotate-text
