@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 13.0.0
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/7
+
+* Upgrade to Angular 13.3.0
+
 ## 12.0.0
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/6
