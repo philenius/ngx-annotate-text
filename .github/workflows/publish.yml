@@ -29,6 +29,5 @@ jobs:
       - name: Publish to npmjs.com
         uses: JS-DevTools/npm-publish@v1
         with:
-          dry-run: true
           package: ./dist/ngx-annotate-text/package.json
           token: ${{ secrets.NPM_TOKEN }}
