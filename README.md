@@ -127,13 +127,21 @@ For the demo application, please see the Angular app in `./src/app/`. Screen rec
 
 ## Development
 
+### Recreate project from scratch
+
+```bash
+ng new ngx-annotate-text-workspace
+cd ngx-annotate-text-workspace/
+ng generate library ngx-annotate-text
+```
+
 ### Build
 
 Run `ng build ngx-annotate-text` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ### Running linting tools
 
-Run `ng lint ngx-annotate-text ` to execute ESLint.
+Run `ng lint ngx-annotate-text` to execute ESLint.
 
 ### Running unit tests
 
@@ -142,7 +150,7 @@ Run `ng test ngx-annotate-text --code-coverage` to execute the unit tests via [K
 ### Publish library as an npm package
 
 ```bash
-ng build ngx-annotate-text --prod
+ng build ngx-annotate-text --configuration production
 cd dist/ngx-annotate-text
 npm publish
 ```
