@@ -152,8 +152,9 @@
       }
     }
   },
-  "defaultProject": "ngx-annotate-text-workspace",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
