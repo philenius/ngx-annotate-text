@@ -1,13 +1,13 @@
 # ngx-annotate-text
 
-<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/philenius/ngx-annotate-text/Build%20&%20test%20NPM%20package/master?style=for-the-badge"> <a href="https://github.com/philenius/ngx-annotate-text/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/philenius/ngx-annotate-text?style=for-the-badge"></a> <img alt="GitHub" src="https://img.shields.io/github/license/philenius/ngx-annotate-text?style=for-the-badge"> <img alt="npm" src="https://img.shields.io/npm/v/ngx-annotate-text?style=for-the-badge"> 
+<img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/actions/workflow/status/philenius/ngx-annotate-text/main.yml?branch=main&style=for-the-badge"> <a href="https://github.com/philenius/ngx-annotate-text/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/philenius/ngx-annotate-text?style=for-the-badge"></a> <img alt="GitHub" src="https://img.shields.io/github/license/philenius/ngx-annotate-text?style=for-the-badge"> <img alt="npm" src="https://img.shields.io/npm/v/ngx-annotate-text?style=for-the-badge"> 
 
 [![Edit ngx-annotate-text demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark)
 
 
 An Angular component library for interactively highlighting / annotating parts of text.
 
-![Screenshot](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/philenius/ngx-annotate-text/main/screenshot.png)
 
 ## Features
 
@@ -21,7 +21,7 @@ An Angular component library for interactively highlighting / annotating parts o
 
 [![Edit ngx-annotate-text demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark)
 
-View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark">codesandbox.io</a> or look through the code of the demo app in [ngx-annotate-text/src/app/](https://github.com/philenius/ngx-annotate-text/tree/master/src/app).
+View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark">codesandbox.io</a> or look through the code of the demo app in [ngx-annotate-text/src/app/](https://github.com/philenius/ngx-annotate-text/tree/main/src/app).
 
 
 
@@ -29,7 +29,7 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 **Screen recording:**
 
 
-![Screen recording GIF](https://raw.githubusercontent.com/philenius/ngx-annotate-text/master/screen-recording.gif)
+![Screen recording GIF](https://raw.githubusercontent.com/philenius/ngx-annotate-text/main/screen-recording.gif)
 
 ## Usage
 
@@ -170,6 +170,8 @@ Run `ng lint ngx-annotate-text` to execute ESLint.
 Run `ng test ngx-annotate-text --code-coverage` to execute the unit tests via [Karma](https://karma-runner.github.io). Don't forget to set the environment variable for where to find Chrome / Chromium like so: `export CHROME_BIN=/snap/bin/chromium`.
 
 ### Publish library as an npm package
+
+:warning: Don't manually publish to npmjs.org, there is a pipeline that runs automatically when a new release is created.
 
 ```bash
 ng build ngx-annotate-text --configuration production
