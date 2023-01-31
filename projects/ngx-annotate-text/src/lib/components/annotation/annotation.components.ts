@@ -11,6 +11,7 @@ export class AnnotationComponent {
 
   @Input() annotation?: Annotation;
   @Input() removable = true;
+  @Output() clickAnnotation = new EventEmitter<Annotation>();
   @Output() removeAnnotation = new EventEmitter<Annotation>();
 
   constructor() { }
