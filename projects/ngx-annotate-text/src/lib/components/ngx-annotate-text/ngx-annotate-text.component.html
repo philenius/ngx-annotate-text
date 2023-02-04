@@ -1,9 +1,13 @@
 <span *ngFor="let token of tokens">
-
-  <ngx-annotation *ngIf="isAnnotation(token)" [annotation]="token" [removable]="removable"
-    (removeAnnotation)="onRemoveAnnotation($event)" [class]="(annotationClass || '')">
+  <ngx-annotation
+    *ngIf="isAnnotation(token)"
+    [annotation]="token"
+    [removable]="removable"
+    (removeAnnotation)="onRemoveAnnotation($event)"
+    (clickAnnotation)="clickAnnotation.emit($event)"
+    [class]="annotationClass || ''"
+  >
   </ngx-annotation>
 
   <span *ngIf="!isAnnotation(token)" class="unlabeled">{{ token }}</span>
-
 </span>
