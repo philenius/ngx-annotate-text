@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 14.1.1
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/13
+
+- Bumps `http-cache-semantics` from 4.1.0 to 4.1.1
+
 ## 14.1.0
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/12
