@@ -34,7 +34,7 @@ export class Annotation implements IAnnotation, ISelection {
     this.color = color;
   }
 
-  toString(): String {
+  toString(): string {
     return `Annotation(startIndex=${this.startIndex}, endIndex=${this.endIndex}, label=${this.label}, color=${this.color})`;
   }
 }

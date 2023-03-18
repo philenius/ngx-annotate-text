@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Annotation } from '../models/annotation.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenizerService {
-
-  constructor() { }
-
   public splitTextIntoTokens(text: string, annotations: Annotation[]): (Annotation | string)[] {
     if (annotations.length === 0) {
       return [text];
@@ -55,5 +52,4 @@ export class TokenizerService {
 
     return tokens;
   }
-
 }

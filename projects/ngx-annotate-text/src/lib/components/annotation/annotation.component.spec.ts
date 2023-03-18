@@ -6,11 +6,11 @@ import { AnnotationComponent } from './annotation.components';
 describe('AnnotationComponent', () => {
   let component: AnnotationComponent;
   let fixture: ComponentFixture<AnnotationComponent>;
-  let getAnnotationContentElement = (): HTMLElement =>
+  const getAnnotationContentElement = (): HTMLElement =>
     fixture.nativeElement.querySelector('span.annotation-content pre');
-  let getAnnotationLabelElement = (): HTMLElement =>
+  const getAnnotationLabelElement = (): HTMLElement =>
     fixture.nativeElement.querySelector('span.annotation-label');
-  let getAnnotationParentElement = (): HTMLElement =>
+  const getAnnotationParentElement = (): HTMLElement =>
     fixture.nativeElement.querySelector('span.annotation-parent');
 
   beforeEach(async () => {

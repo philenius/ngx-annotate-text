@@ -1,13 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
 import { TokenizerService } from '../../services/tokenizer.service';
@@ -35,41 +26,28 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   @Input() text = '';
 
   /** Emits the list of existing annotations after an element has been removed. */
-  @Output() annotationsChange: EventEmitter<Annotation[]> = new EventEmitter<
-    Annotation[]
-  >();
+  @Output() annotationsChange: EventEmitter<Annotation[]> = new EventEmitter<Annotation[]>();
 
   /** Emits the selected annotation when the user clicks on an annotation's box, the label or text. */
-  @Output() clickAnnotation: EventEmitter<Annotation> =
-    new EventEmitter<Annotation>();
+  @Output() clickAnnotation: EventEmitter<Annotation> = new EventEmitter<Annotation>();
 
   /** Emits the selected annotation when the user removes it by clicking the annotation's X button in the upper right corner. */
-  @Output() removeAnnotation: EventEmitter<Annotation> =
-    new EventEmitter<Annotation>();
+  @Output() removeAnnotation: EventEmitter<Annotation> = new EventEmitter<Annotation>();
 
   /** @internal */
   tokens: any[] = [];
   private selectionStart?: number;
   private selectionEnd?: number;
 
-  constructor(
-    private elementRef: ElementRef,
-    private tokenService: TokenizerService
-  ) {}
+  constructor(private elementRef: ElementRef, private tokenService: TokenizerService) {}
 
   ngOnInit(): void {
-    this.tokens = this.tokenService.splitTextIntoTokens(
-      this.text,
-      this.annotations
-    );
+    this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('annotations' in changes || 'text' in changes) {
-      this.tokens = this.tokenService.splitTextIntoTokens(
-        this.text,
-        this.annotations
-      );
+      this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
     }
   }
 
@@ -105,10 +83,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    */
   public isOverlappingWithExistingAnnotations(selection: ISelection): boolean {
     const overlappingAnnotation = this.annotations.find((annotation) => {
-      return (
-        Math.max(annotation.startIndex, selection.startIndex) <
-        Math.min(annotation.endIndex, selection.endIndex)
-      );
+      return Math.max(annotation.startIndex, selection.startIndex) < Math.min(annotation.endIndex, selection.endIndex);
     });
     return overlappingAnnotation != undefined;
   }
@@ -123,10 +98,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
     this.annotations = this.annotations.filter((a) => a !== annotation);
     this.removeAnnotation.emit(annotation);
     this.annotationsChange.emit(this.annotations);
-    this.tokens = this.tokenService.splitTextIntoTokens(
-      this.text,
-      this.annotations
-    );
+    this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
   }
 
   private updateTextSelection(): void {
