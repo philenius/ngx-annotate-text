@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 15.2.4
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/15
+
+- Hotfix: increase dependent Angular version from v14 to v15
+
 ## 15.2.3
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/14
