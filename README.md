@@ -127,11 +127,10 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^14
+npm install -g @angular/cli@^15
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-npm install bootstrap
 npm install --save-dev \
   eslint \
   @angular-eslint/builder \
@@ -146,6 +145,10 @@ npm install --save-dev \
 ### Build
 
 Run `ng build ngx-annotate-text` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+### Running the demo app
+
+Run `ng serve --open` to start the demo app in your browser.
 
 ### Running linting tools
 
