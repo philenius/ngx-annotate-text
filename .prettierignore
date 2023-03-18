@@ -1,0 +1,5 @@
+.angular/
+.github/
+coverage
+dist
+e2e
