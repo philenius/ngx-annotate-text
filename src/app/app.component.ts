@@ -19,7 +19,7 @@ export class AppComponent {
     new Annotation(77, 85, 'Time', '#6c757d'),
   ];
 
-  events: String[] = [];
+  events: string[] = [];
 
   addAnnotation(label: string, color: string): void {
     if (!this.ngxAnnotateText) {

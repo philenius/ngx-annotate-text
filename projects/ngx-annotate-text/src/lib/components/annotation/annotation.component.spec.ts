@@ -8,10 +8,8 @@ describe('AnnotationComponent', () => {
   let fixture: ComponentFixture<AnnotationComponent>;
   const getAnnotationContentElement = (): HTMLElement =>
     fixture.nativeElement.querySelector('span.annotation-content pre');
-  const getAnnotationLabelElement = (): HTMLElement =>
-    fixture.nativeElement.querySelector('span.annotation-label');
-  const getAnnotationParentElement = (): HTMLElement =>
-    fixture.nativeElement.querySelector('span.annotation-parent');
+  const getAnnotationLabelElement = (): HTMLElement => fixture.nativeElement.querySelector('span.annotation-label');
+  const getAnnotationParentElement = (): HTMLElement => fixture.nativeElement.querySelector('button.annotation-parent');
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,9 +40,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(getAnnotationLabelElement().getAttribute('data-label')).toBe(
-      annotation.label
-    );
+    expect(getAnnotationLabelElement().getAttribute('data-label')).toBe(annotation.label);
   });
 
   it('should set the border color of the annotation to the specified color', () => {
@@ -54,9 +50,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(getAnnotationParentElement().style.borderColor).toBe(
-      annotation.color
-    );
+    expect(getAnnotationParentElement().style.borderColor).toBe(annotation.color);
   });
 
   it(`should set the background color of the annotation's label to the specified color`, () => {
@@ -66,9 +60,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(getAnnotationLabelElement().style.backgroundColor).toBe(
-      annotation.color
-    );
+    expect(getAnnotationLabelElement().style.backgroundColor).toBe(annotation.color);
   });
 
   it('should display a button to remove the annotation if removable == true', () => {
@@ -79,9 +71,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(
-      fixture.nativeElement.querySelector('button.remove-annotation')
-    ).toBeDefined();
+    expect(fixture.nativeElement.querySelector('button.remove-annotation')).toBeDefined();
   });
 
   it('should not display a button to remove the annotation if removable == false', () => {
@@ -92,9 +82,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    expect(
-      fixture.nativeElement.querySelector('button.remove-annotation')
-    ).toBeNull();
+    expect(fixture.nativeElement.querySelector('button.remove-annotation')).toBeNull();
   });
 
   it('should remove the annotation on clicking the remove button', async () => {
@@ -123,7 +111,7 @@ describe('AnnotationComponent', () => {
 
     fixture.detectChanges();
 
-    fixture.nativeElement.querySelector('span.annotation-parent').click();
+    fixture.nativeElement.querySelector('button.annotation-parent').click();
 
     fixture.whenStable().then(() => {
       expect(component.clickAnnotation.emit).toHaveBeenCalledWith(annotation);
