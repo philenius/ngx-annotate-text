@@ -1,4 +1,4 @@
-<span
+<button
   *ngIf="annotation"
   class="annotation-parent"
   [style.border-color]="annotation.color"
@@ -17,11 +17,7 @@
         extract which text range the user actually selected. By using the CSS pseudo-class "::after", we can prevent
         the annotations' labels from being included into the selected text range. -->
 
-  <span
-    class="annotation-label"
-    [attr.data-label]="annotation.label"
-    [style.background-color]="annotation.color"
-  >
+  <span class="annotation-label" [attr.data-label]="annotation.label" [style.background-color]="annotation.color">
   </span>
 
   <span class="annotation-button" *ngIf="removable">
@@ -29,7 +25,8 @@
       <button
         class="remove-annotation"
         (click)="removeAnnotation.emit(annotation)"
+        aria-label="remove annotation"
       ></button>
     </span>
   </span>
-</span>
+</button>

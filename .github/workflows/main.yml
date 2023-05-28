@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: Install dependencies
         run: npm ci
@@ -29,4 +29,4 @@ jobs:
         run: npm run test-headless ngx-annotate-text
       
       - name: Build Angular demo app
-        run: npm run build --prod
+        run: npm run build --omit=dev

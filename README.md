@@ -127,19 +127,12 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^15
+npm install -g @angular/cli@^16
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-npm install --save-dev \
-  eslint \
-  @angular-eslint/builder \
-  @angular-eslint/eslint-plugin \
-  @angular-eslint/eslint-plugin-template \
-  @angular-eslint/schematics \
-  @angular-eslint/template-parser \
-  @typescript-eslint/eslint-plugin \
-  @typescript-eslint/parser
+ng add @angular-eslint/schematics
+npm install prettier
 ```
 
 ### Build
