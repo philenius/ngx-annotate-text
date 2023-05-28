@@ -12,10 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngx-annotate-text": [
-        "dist/ngx-annotate-text/ngx-annotate-text",
-        "dist/ngx-annotate-text"
-      ]
+      "ngx-annotate-text": ["dist/ngx-annotate-text"]
     },
     "declaration": false,
     "downlevelIteration": true,
@@ -23,12 +20,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-    "useDefineForClassFields": false
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

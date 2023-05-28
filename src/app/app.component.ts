@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Annotation, NgxAnnotateTextComponent } from 'ngx-annotate-text';
+import { NgxAnnotateTextComponent, Annotation } from 'projects/ngx-annotate-text/src/public-api';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -10,8 +10,7 @@ import { Annotation, NgxAnnotateTextComponent } from 'ngx-annotate-text';
 export class AppComponent {
   @ViewChild('annotateText') ngxAnnotateText?: NgxAnnotateTextComponent;
 
-  text =
-    'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+  text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
   annotations: Annotation[] = [
     new Annotation(3, 11, 'Date', '#0d6efd'),
@@ -37,12 +36,7 @@ export class AppComponent {
       return;
     }
 
-    const annotation = new Annotation(
-      selection.startIndex,
-      selection.endIndex,
-      label,
-      color
-    );
+    const annotation = new Annotation(selection.startIndex, selection.endIndex, label, color);
     this.annotations = this.annotations.concat(annotation);
     this.events.push(`Added '${annotation}'`);
   }

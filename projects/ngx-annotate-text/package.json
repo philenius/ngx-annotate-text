@@ -5,8 +5,8 @@
   "license": "MIT",
   "description": "An Angular component library for interactively highlighting / annotating parts of text.",
   "peerDependencies": {
-    "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0"
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
@@ -15,9 +15,14 @@
     "Angular",
     "TypeScript library",
     "Angular component",
+    "annotate",
+    "annotation documents",
     "annotation tool",
     "annotate text",
-    "mark entities"
+    "mark entities",
+    "NLP",
+    "entities",
+    "pos-tagging"
   ],
   "repository": {
     "type": "git",
