@@ -1,12 +1,18 @@
 # CHANGELOG
 
+## 16.0.0
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/17
+
+- Upgrade to Angular 16.0.0
+
 ## 15.2.5
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/16
 
-* Bumps socket.io-parser and socket.io. These dependencies needed to be updated together:
-  * Updates socket.io-parser from 4.0.5 to 4.2.3
-  * Updates socket.io from 4.5.0 to 4.6.1.
+- Bumps socket.io-parser and socket.io. These dependencies needed to be updated together:
+  - Updates socket.io-parser from 4.0.5 to 4.2.3
+  - Updates socket.io from 4.5.0 to 4.6.1.
 
 ## 15.2.4
 
