@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 17.2.0
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/22
+
+- Upgrade to Angular 17.2.0
+
 ## 16.0.1
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/21

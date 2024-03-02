@@ -51,6 +51,23 @@ describe('NgxAnnotateTextComponent', () => {
     expect(component.isAnnotation('Hello')).toBeFalse();
   });
 
+  describe('toAnnotation()', () => {
+    it('should convert an instance of Annotation', () => {
+      const annotation: Annotation | string = new Annotation(0, 7, 'Language', 'red');
+      annotation.text = 'Spanish';
+
+      expect(component.toAnnotation(annotation)).toBeInstanceOf(Annotation);
+    });
+
+    it('should not convert an instance of string', () => {
+      const annotation: Annotation | string = 'Hello';
+
+      expect(() => component.toAnnotation(annotation)).toThrowError(
+        'Cannot convert token of type string to type Annotation',
+      );
+    });
+  });
+
   it('should emit an empty list of annotations if the only annotation has been removed', () => {
     spyOn(component.annotationsChange, 'emit');
     spyOn(component.removeAnnotation, 'emit');

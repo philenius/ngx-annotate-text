@@ -1,11 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgxAnnotateTextComponent, Annotation } from 'projects/ngx-annotate-text/src/public-api';
+import { RouterOutlet } from '@angular/router';
+import { NgxAnnotateTextModule } from '../../projects/ngx-annotate-text/src/lib/ngx-annotate-text.module';
+import { NgxAnnotateTextComponent } from '../../dist/ngx-annotate-text/public-api';
+import { Annotation } from '../../projects/ngx-annotate-text/src/public-api';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, NgxAnnotateTextModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   @ViewChild('annotateText') ngxAnnotateText?: NgxAnnotateTextComponent;

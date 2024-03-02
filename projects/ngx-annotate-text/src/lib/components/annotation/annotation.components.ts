@@ -8,7 +8,7 @@ import { Annotation } from '../../models/annotation.model';
   styleUrls: ['./annotation.component.css'],
 })
 export class AnnotationComponent {
-  @Input() annotation?: Annotation;
+  @Input({ required: true }) annotation!: Annotation;
   @Input() removable = true;
   @Output() clickAnnotation = new EventEmitter<Annotation>();
   @Output() removeAnnotation = new EventEmitter<Annotation>();
