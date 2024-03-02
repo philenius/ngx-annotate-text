@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 16.0.1
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/21
+
+- Npm audit fix
+
 ## 16.0.0
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/17
