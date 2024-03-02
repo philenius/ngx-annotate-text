@@ -35,11 +35,14 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   @Output() removeAnnotation: EventEmitter<Annotation> = new EventEmitter<Annotation>();
 
   /** @internal */
-  tokens: any[] = [];
+  tokens: (string | Annotation)[] = [];
   private selectionStart?: number;
   private selectionEnd?: number;
 
-  constructor(private elementRef: ElementRef, private tokenService: TokenizerService) {}
+  constructor(
+    private elementRef: ElementRef,
+    private tokenService: TokenizerService,
+  ) {}
 
   ngOnInit(): void {
     this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
@@ -91,6 +94,14 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   /** @internal */
   isAnnotation(annotation: Annotation | string): boolean {
     return annotation instanceof Annotation;
+  }
+
+  /** @internal */
+  toAnnotation(token: Annotation | string): Annotation {
+    if (token instanceof Annotation) {
+      return token as Annotation;
+    }
+    throw new TypeError('Cannot convert token of type string to type Annotation');
   }
 
   /** @internal */
