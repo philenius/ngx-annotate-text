@@ -1,21 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Type, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxAnnotateTextModule } from '../../projects/ngx-annotate-text/src/lib/ngx-annotate-text.module';
-import { NgxAnnotateTextComponent } from '../../dist/ngx-annotate-text/public-api';
-import { Annotation } from '../../projects/ngx-annotate-text/src/public-api';
+import { Annotation, NgxAnnotateTextComponent } from '../../projects/ngx-annotate-text/src/public-api';
+import { MyAnnotationRendererComponent } from './my-annotation-renderer/my-annotation-renderer.component';
+import { NgxAnnotationRendererComponent } from '../../projects/ngx-annotate-text/src/lib/components/annotation/annotation-renderer.components';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgxAnnotateTextModule],
+  imports: [RouterOutlet, NgxAnnotateTextModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   @ViewChild('annotateText') ngxAnnotateText?: NgxAnnotateTextComponent;
-
-  text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
   annotations: Annotation[] = [
     new Annotation(3, 11, 'Date', '#0d6efd'),
@@ -24,7 +24,15 @@ export class AppComponent {
     new Annotation(77, 85, 'Time', '#6c757d'),
   ];
 
+  areAnnotationsRemovable = true;
+
   events: string[] = [];
+
+  rendererComponents: Type<any>[] = [NgxAnnotationRendererComponent, MyAnnotationRendererComponent];
+
+  selectedRendererComponent: Type<any> = NgxAnnotationRendererComponent;
+
+  text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
   addAnnotation(label: string, color: string): void {
     if (!this.ngxAnnotateText) {

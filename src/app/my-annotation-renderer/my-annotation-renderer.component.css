@@ -1,0 +1,36 @@
+span.container {
+  display: flex;
+  flex-direction: column;
+
+  button.text {
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid;
+  }
+
+  span.label {
+    user-select: none;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  span.popup {
+    position: absolute;
+    color: white;
+    padding: 1rem;
+    width: 25rem;
+    box-shadow: 5px 5px 10px gainsboro;
+    border-radius: 0.5rem;
+
+    span.chip-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    button {
+      margin-top: 1rem;
+    }
+  }
+}

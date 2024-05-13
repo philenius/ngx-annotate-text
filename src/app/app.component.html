@@ -4,23 +4,50 @@
 
     <ngx-annotate-text
       [(annotations)]="annotations"
-      [removable]="true"
+      [removable]="areAnnotationsRemovable"
       [text]="text"
       annotationClass="my-annotation"
       (clickAnnotation)="onClickAnnotation($event)"
       (removeAnnotation)="onRemoveAnnotation($event)"
+      [annotationRenderComponent]="selectedRendererComponent"
       #annotateText
     >
     </ngx-annotate-text>
   </div>
 </div>
 
-<div class="row mt-3">
+<div class="row mt-3 mb-5">
   <div class="col-12">
     <button type="button" class="btn btn-primary me-2" (click)="addAnnotation('Date', '#0d6efd')">Date</button>
     <button type="button" class="btn btn-secondary me-2" (click)="addAnnotation('Time', '#6c757d')">Time</button>
     <button type="button" class="btn btn-success me-2" (click)="addAnnotation('Country', '#198754')">Country</button>
     <button type="button" class="btn btn-danger me-2" (click)="addAnnotation('City', '#dc3545')">City</button>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col-12">
+    <h2 class="mb-3 display-5">Settings</h2>
+
+    <label for="annotation-renderer-select">Annotation renderer:</label>
+    <select class="form-control mb-3" id="annotation-renderer-select" [(ngModel)]="selectedRendererComponent">
+      @for (renderer of rendererComponents; track $index) {
+        <option [ngValue]="renderer" [selected]="renderer.name === selectedRendererComponent.name">
+          {{ renderer.name.split("_")[1] }}
+        </option>
+      }
+    </select>
+
+    <div class="form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+        [(ngModel)]="areAnnotationsRemovable"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault">Removable annotations</label>
+    </div>
   </div>
 </div>
 
