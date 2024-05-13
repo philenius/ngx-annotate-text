@@ -3,7 +3,7 @@ import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
-import { AnnotationComponent } from '../annotation/annotation.components';
+import { NgxAnnotationRendererComponent } from '../annotation/annotation-renderer.components';
 
 import { NgxAnnotateTextComponent } from './ngx-annotate-text.component';
 
@@ -13,7 +13,7 @@ describe('NgxAnnotateTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NgxAnnotateTextComponent, AnnotationComponent],
+      declarations: [NgxAnnotateTextComponent, NgxAnnotationRendererComponent],
     });
 
     fixture = TestBed.createComponent(NgxAnnotateTextComponent);

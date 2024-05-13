@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
 
-import { AnnotationComponent } from './annotation.components';
+import { NgxAnnotationRendererComponent } from './annotation-renderer.components';
 
-describe('AnnotationComponent', () => {
-  let component: AnnotationComponent;
-  let fixture: ComponentFixture<AnnotationComponent>;
+describe('AnnotationRendererComponent', () => {
+  let component: NgxAnnotationRendererComponent;
+  let fixture: ComponentFixture<NgxAnnotationRendererComponent>;
   const getAnnotationContentElement = (): HTMLElement =>
     fixture.nativeElement.querySelector('span.annotation-content pre');
   const getAnnotationLabelElement = (): HTMLElement => fixture.nativeElement.querySelector('span.annotation-label');
@@ -13,12 +13,12 @@ describe('AnnotationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AnnotationComponent],
+      declarations: [NgxAnnotationRendererComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnnotationComponent);
+    fixture = TestBed.createComponent(NgxAnnotationRendererComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

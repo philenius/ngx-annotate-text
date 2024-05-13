@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AnnotationComponent } from './components/annotation/annotation.components';
+import { CommonModule, NgComponentOutlet } from '@angular/common';
+import { NgxAnnotationRendererComponent } from './components/annotation/annotation-renderer.components';
 import { NgxAnnotateTextComponent } from './components/ngx-annotate-text/ngx-annotate-text.component';
 
 @NgModule({
-  declarations: [AnnotationComponent, NgxAnnotateTextComponent],
-  imports: [CommonModule],
-  exports: [NgxAnnotateTextComponent],
+  declarations: [NgxAnnotationRendererComponent, NgxAnnotateTextComponent],
+  imports: [CommonModule, NgComponentOutlet],
+  exports: [NgxAnnotateTextComponent, NgxAnnotationRendererComponent],
 })
 export class NgxAnnotateTextModule {}

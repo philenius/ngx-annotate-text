@@ -1,7 +1,18 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  Type,
+} from '@angular/core';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
 import { TokenizerService } from '../../services/tokenizer.service';
+import { NgxAnnotationRendererComponent } from '../annotation/annotation-renderer.components';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -15,6 +26,8 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
 
   /** An optional CSS class applied to all elements which wrap the annotated parts of the given text. */
   @Input() annotationClass?: string;
+
+  @Input() annotationRenderComponent: Type<any> = NgxAnnotationRendererComponent;
 
   /**
    * Determines whether annotations shall have a small button in the top right corner so that the user can
@@ -97,11 +110,16 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   }
 
   /** @internal */
-  toAnnotation(token: Annotation | string): Annotation {
+  toRecord(token: Annotation | string): Record<string, unknown> {
     if (token instanceof Annotation) {
-      return token as Annotation;
+      return {
+        annotation: token as Annotation,
+        removable: this.removable,
+        clickAnnotation: (annotation: Annotation) => this.clickAnnotation.emit(annotation),
+        removeAnnotation: (annotation: Annotation) => this.onRemoveAnnotation(annotation),
+      };
     }
-    throw new TypeError('Cannot convert token of type string to type Annotation');
+    throw new TypeError(`Cannot convert token of type ${typeof token} to type Record`);
   }
 
   /** @internal */
