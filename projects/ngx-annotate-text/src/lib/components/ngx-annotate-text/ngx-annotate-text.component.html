@@ -2,7 +2,7 @@
   <span>
     @if (isAnnotation(token)) {
       <ng-container
-        *ngComponentOutlet="annotationRenderComponent; inputs: toRecord(token)"
+        *ngComponentOutlet="annotationRendererComponent; inputs: toRecord(token)"
         [class]="annotationClass || ''"
       ></ng-container>
     } @else {

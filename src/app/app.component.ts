@@ -2,7 +2,7 @@ import { Component, Type, ViewChild } from '@angular/core';
 import { NgxAnnotateTextModule } from '../../projects/ngx-annotate-text/src/lib/ngx-annotate-text.module';
 import { Annotation, NgxAnnotateTextComponent } from '../../projects/ngx-annotate-text/src/public-api';
 import { MyAnnotationRendererComponent } from './my-annotation-renderer/my-annotation-renderer.component';
-import { NgxAnnotationRendererComponent } from '../../projects/ngx-annotate-text/src/lib/components/annotation/annotation-renderer.components';
+import { NgxAnnotationRendererComponent } from '../../projects/ngx-annotate-text/src/lib/components/annotation-renderer/annotation-renderer.components';
 import { FormsModule } from '@angular/forms';
 import { NgxAnnotationRendererComponentInterface } from '../../projects/ngx-annotate-text/src/lib/models/annotation-renderer-component.model';
 

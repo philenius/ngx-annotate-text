@@ -12,7 +12,7 @@ import {
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
 import { TokenizerService } from '../../services/tokenizer.service';
-import { NgxAnnotationRendererComponent } from '../annotation/annotation-renderer.components';
+import { NgxAnnotationRendererComponent } from '../annotation-renderer/annotation-renderer.components';
 import { NgxAnnotationRendererComponentInterface } from '../../models/annotation-renderer-component.model';
 
 @Component({
@@ -33,7 +33,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    * You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the
    * interface `NgxAnnotationRendererComponentInterface`.
    */
-  @Input() annotationRenderComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
+  @Input() annotationRendererComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
 
   /**
    * Determines whether annotations shall have a small button in the top right corner so that the user can
