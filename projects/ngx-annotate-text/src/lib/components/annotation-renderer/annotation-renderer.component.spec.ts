@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
 
-import { AnnotationComponent } from './annotation.components';
+import { NgxAnnotationRendererComponent } from './annotation-renderer.components';
 
-describe('AnnotationComponent', () => {
-  let component: AnnotationComponent;
-  let fixture: ComponentFixture<AnnotationComponent>;
+describe('AnnotationRendererComponent', () => {
+  let component: NgxAnnotationRendererComponent;
+  let fixture: ComponentFixture<NgxAnnotationRendererComponent>;
   const getAnnotationContentElement = (): HTMLElement =>
     fixture.nativeElement.querySelector('span.annotation-content pre');
   const getAnnotationLabelElement = (): HTMLElement => fixture.nativeElement.querySelector('span.annotation-label');
   const getAnnotationParentElement = (): HTMLElement => fixture.nativeElement.querySelector('button.annotation-parent');
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AnnotationComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({ declarations: [NgxAnnotationRendererComponent] }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnnotationComponent);
+    fixture = TestBed.createComponent(NgxAnnotationRendererComponent);
     component = fixture.componentInstance;
+    component.clickAnnotation = () => {};
+    component.removeAnnotation = () => {};
     fixture.detectChanges();
   });
 
@@ -85,8 +85,8 @@ describe('AnnotationComponent', () => {
     expect(fixture.nativeElement.querySelector('button.remove-annotation')).toBeNull();
   });
 
-  it('should remove the annotation on clicking the remove button', async () => {
-    spyOn(component.removeAnnotation, 'emit');
+  it("should call the callback function 'removeAnnotation' when a user clicks on the remove button", async () => {
+    spyOn(component, 'removeAnnotation');
 
     const annotation = new Annotation(0, 13, 'City', 'rgb(60, 65, 75)');
     annotation.text = 'San Francisco';
@@ -98,12 +98,12 @@ describe('AnnotationComponent', () => {
     fixture.nativeElement.querySelector('button.remove-annotation').click();
 
     fixture.whenStable().then(() => {
-      expect(component.removeAnnotation.emit).toHaveBeenCalled();
+      expect(component.removeAnnotation).toHaveBeenCalledWith(annotation);
     });
   });
 
-  it("should emit an event when the user clicks on the annotation's box", async () => {
-    spyOn(component.clickAnnotation, 'emit');
+  it("should call the callback function 'clickAnnotation' when a user clicks on the annotation's box", async () => {
+    spyOn(component, 'clickAnnotation');
 
     const annotation = new Annotation(0, 13, 'City', 'rgb(60, 65, 75)');
     annotation.text = 'San Francisco';
@@ -114,12 +114,12 @@ describe('AnnotationComponent', () => {
     fixture.nativeElement.querySelector('button.annotation-parent').click();
 
     fixture.whenStable().then(() => {
-      expect(component.clickAnnotation.emit).toHaveBeenCalledWith(annotation);
+      expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
     });
   });
 
-  it("should emit an event when the user clicks on the annotation's text", async () => {
-    spyOn(component.clickAnnotation, 'emit');
+  it("should call the callback function 'clickAnnotation' when the user clicks on the annotation's text", async () => {
+    spyOn(component, 'clickAnnotation');
 
     const annotation = new Annotation(0, 11, 'City', 'rgb(0, 255, 255)');
     annotation.text = 'Los Angeles';
@@ -130,12 +130,12 @@ describe('AnnotationComponent', () => {
     fixture.nativeElement.querySelector('span.annotation-content').click();
 
     fixture.whenStable().then(() => {
-      expect(component.clickAnnotation.emit).toHaveBeenCalledWith(annotation);
+      expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
     });
   });
 
-  it("should emit an event when the user clicks on the annotation's label", async () => {
-    spyOn(component.clickAnnotation, 'emit');
+  it("should call the callback function 'clickAnnotation' when the user clicks on the annotation's label", async () => {
+    spyOn(component, 'clickAnnotation');
 
     const annotation = new Annotation(0, 9, 'City', 'rgb(255, 255, 0)');
     annotation.text = 'Frankfurt';
@@ -146,7 +146,7 @@ describe('AnnotationComponent', () => {
     fixture.nativeElement.querySelector('span.annotation-label').click();
 
     fixture.whenStable().then(() => {
-      expect(component.clickAnnotation.emit).toHaveBeenCalledWith(annotation);
+      expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
     });
   });
 });

@@ -3,7 +3,7 @@ import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
-import { AnnotationComponent } from '../annotation/annotation.components';
+import { NgxAnnotationRendererComponent } from '../annotation-renderer/annotation-renderer.components';
 
 import { NgxAnnotateTextComponent } from './ngx-annotate-text.component';
 
@@ -12,9 +12,7 @@ describe('NgxAnnotateTextComponent', () => {
   let fixture: ComponentFixture<NgxAnnotateTextComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [NgxAnnotateTextComponent, AnnotationComponent],
-    });
+    await TestBed.configureTestingModule({ declarations: [NgxAnnotateTextComponent, NgxAnnotationRendererComponent] });
 
     fixture = TestBed.createComponent(NgxAnnotateTextComponent);
     component = fixture.componentInstance;
@@ -51,20 +49,36 @@ describe('NgxAnnotateTextComponent', () => {
     expect(component.isAnnotation('Hello')).toBeFalse();
   });
 
-  describe('toAnnotation()', () => {
-    it('should convert an instance of Annotation', () => {
-      const annotation: Annotation | string = new Annotation(0, 7, 'Language', 'red');
+  describe('toRecord()', () => {
+    it('should convert an instance of Annotation to a record of inputs for the annotation renderer component', () => {
+      const annotation: Annotation = new Annotation(0, 7, 'Language', 'red');
       annotation.text = 'Spanish';
 
-      expect(component.toAnnotation(annotation)).toBeInstanceOf(Annotation);
+      expect(component.toRecord(annotation)).toEqual({
+        annotation: annotation,
+        removable: true,
+        clickAnnotation: jasmine.any(Function),
+        removeAnnotation: jasmine.any(Function),
+      });
+    });
+
+    it('should convert an instance of Annotation to a record of inputs for the annotation renderer component when annotations are removable', () => {
+      component.removable = false;
+      const annotation: Annotation = new Annotation(0, 7, 'Language', 'red');
+      annotation.text = 'Spanish';
+
+      expect(component.toRecord(annotation)).toEqual({
+        annotation: annotation,
+        removable: false,
+        clickAnnotation: jasmine.any(Function),
+        removeAnnotation: jasmine.any(Function),
+      });
     });
 
     it('should not convert an instance of string', () => {
       const annotation: Annotation | string = 'Hello';
 
-      expect(() => component.toAnnotation(annotation)).toThrowError(
-        'Cannot convert token of type string to type Annotation',
-      );
+      expect(() => component.toRecord(annotation)).toThrowError('Cannot convert token of type string to type Record');
     });
   });
 
@@ -109,9 +123,7 @@ describe('NgxAnnotateTextComponent', () => {
     expect((component.tokens[0] as Annotation).text).toBe('Hello');
 
     component.text = 'Now, with an updated message.';
-    component.ngOnChanges({
-      text: new SimpleChange('Hello, world', 'Now, with an updated message.', false),
-    });
+    component.ngOnChanges({ text: new SimpleChange('Hello, world', 'Now, with an updated message.', false) });
     fixture.detectChanges();
 
     expect(component.tokens.length).toBe(2);
@@ -127,9 +139,7 @@ describe('NgxAnnotateTextComponent', () => {
     expect((component.tokens[0] as Annotation).text).toBe('Hello');
 
     component.annotations = [new Annotation(0, 5, 'Token1', 'red'), new Annotation(7, 12, 'Token2', 'red')];
-    component.ngOnChanges({
-      annotations: new SimpleChange([], [], false),
-    });
+    component.ngOnChanges({ annotations: new SimpleChange([], [], false) });
     fixture.detectChanges();
 
     expect(component.tokens.length).toBe(3);
@@ -210,10 +220,7 @@ describe('NgxAnnotateTextComponent', () => {
 
   describe('isOverlappingWithExistingAnnotations()', () => {
     it('should return false if there is no annotation that overlaps with the selection', () => {
-      const selection: ISelection = {
-        startIndex: 5,
-        endIndex: 9,
-      };
+      const selection: ISelection = { startIndex: 5, endIndex: 9 };
 
       component.annotations = [
         new Annotation(0, 5, 'Article', 'yellow'),
@@ -229,10 +236,7 @@ describe('NgxAnnotateTextComponent', () => {
      * Selection:   ####
      */
     it('should return true if there exists an annotation with identical start and end index', () => {
-      const selection: ISelection = {
-        startIndex: 5,
-        endIndex: 12,
-      };
+      const selection: ISelection = { startIndex: 5, endIndex: 12 };
 
       component.annotations = [new Annotation(5, 12, 'Noun', 'blue')];
 
@@ -244,10 +248,7 @@ describe('NgxAnnotateTextComponent', () => {
      * Selection:   ####
      */
     it('should return true if the selection partially overlaps with an existing annotation', () => {
-      const selection: ISelection = {
-        startIndex: 0,
-        endIndex: 6,
-      };
+      const selection: ISelection = { startIndex: 0, endIndex: 6 };
 
       component.annotations = [new Annotation(4, 8, 'Verb', 'red')];
 
@@ -259,10 +260,7 @@ describe('NgxAnnotateTextComponent', () => {
      * Selection:     ####
      */
     it('should return true if the selection partially overlaps with an existing annotation', () => {
-      const selection: ISelection = {
-        startIndex: 6,
-        endIndex: 12,
-      };
+      const selection: ISelection = { startIndex: 6, endIndex: 12 };
 
       component.annotations = [new Annotation(4, 8, 'Adjective', 'orange')];
 
@@ -274,10 +272,7 @@ describe('NgxAnnotateTextComponent', () => {
      * Selection:    ##
      */
     it('should return true if the selection is part of an existing annotation', () => {
-      const selection: ISelection = {
-        startIndex: 6,
-        endIndex: 8,
-      };
+      const selection: ISelection = { startIndex: 6, endIndex: 8 };
 
       component.annotations = [new Annotation(4, 10, 'Adjective', 'orange')];
 
@@ -289,10 +284,7 @@ describe('NgxAnnotateTextComponent', () => {
      * Selection:   ####
      */
     it('should return true if the selection is part of an existing annotation', () => {
-      const selection: ISelection = {
-        startIndex: 4,
-        endIndex: 10,
-      };
+      const selection: ISelection = { startIndex: 4, endIndex: 10 };
 
       component.annotations = [new Annotation(6, 8, 'Adjective', 'orange')];
 

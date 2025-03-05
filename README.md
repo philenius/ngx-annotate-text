@@ -5,15 +5,16 @@
 
 [![Edit ngx-annotate-text demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ngx-annotate-text-demo-sgb4t1?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapp%2Fapp.component.html&theme=dark)
 
-An Angular component library for interactively highlighting / annotating parts of text.
+This Angular component library is perfect for tasks like visualizing named entity recognition, part of speech tagging, or annotating text datasets. It allows for interactively highlighting and annotating parts of text.
 
 ![Screenshot](https://raw.githubusercontent.com/philenius/ngx-annotate-text/main/screenshot.png)
 
 ## Features
 
-- :point_up_2: Interactively mark entities such as cities, numbers, dates, etc.
-- :wastebasket: Interactively remove annotations / marked entities.
-- :tada: Purely based on CSS. No magic, no canvas, and no SVGs.
+- 👆 Interactively mark text ranges such as sentences, words, or parts of words.
+- 🗑️ Easily remove existing annotations.
+- 🎉 Purely based on CSS, with no use of SVGs or canvas.
+- 🛠️ Customize annotation rendering with your own Angular components.
 
 ## Demo
 
@@ -100,12 +101,13 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 
 ### Inputs
 
-| Input           | Description                                                  | Type               | Default value |
-| :-------------- | ------------------------------------------------------------ | ------------------ | :------------ |
-| annotations     | Represents the parts of the given text which shall be annotated. | `Annotation[]`     | `[]`          |
-| annotationClass | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | `string|undefined` | `undefined`   |
-| removable       | Determines whether annotations shall have a small button in the top right corner so that the user can remove an annotation. | `boolean`          | `true`        |
-| text            | The text which shall be displayed and annotated.             | `string`           | empty string  |
+| Input                       | Description                                                  | Type               | Default value |
+| :-------------------------- | ------------------------------------------------------------ | ------------------ | :------------ |
+| annotations                 | Represents the parts of the given text which shall be annotated. | `Annotation[]`     | `[]`          |
+| annotationClass             | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | `string|undefined` | `undefined`   |
+| annotationRendererComponent | An optional Angular component that shall be used for rendering the annotation. By default, it uses the provided `NgxAnnotationRendererComponent`. You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the interface `NgxAnnotationRendererComponentInterface`. | `NgxAnnotationRendererComponentInterface` | `NgxAnnotationRendererComponent` |
+| removable                   | Determines whether annotations shall have a small button in the top right corner so that the user can remove an annotation. | `boolean`          | `true`        |
+| text                        | The text which shall be displayed and annotated.             | `string`           | empty string  |
 
 ### Outputs
 
@@ -127,7 +129,7 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^16
+npm install -g @angular/cli@^17
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text

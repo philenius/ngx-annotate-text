@@ -1,8 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.options": {
-    "extensions": [".ts", ".html"]
-  },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html"]
+  "eslint.options": { "extensions": [".ts", ".html"] },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html"],
+  "editor.rulers": [150]
 }

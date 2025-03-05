@@ -1,14 +1,10 @@
 @for (token of tokens; track token) {
   <span>
     @if (isAnnotation(token)) {
-      <ngx-annotation
-        [annotation]="toAnnotation(token)"
-        [removable]="removable"
-        (removeAnnotation)="onRemoveAnnotation($event)"
-        (clickAnnotation)="clickAnnotation.emit($event)"
+      <ng-container
+        *ngComponentOutlet="annotationRendererComponent; inputs: toRecord(token)"
         [class]="annotationClass || ''"
-      >
-      </ngx-annotation>
+      ></ng-container>
     } @else {
       <span class="unlabeled">{{ token }}</span>
     }

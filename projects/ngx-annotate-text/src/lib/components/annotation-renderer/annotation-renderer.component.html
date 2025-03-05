@@ -3,7 +3,7 @@
   class="annotation-parent"
   [style.border-color]="annotation.color"
   [style.background-color]="annotation.color"
-  (click)="clickAnnotation.emit(annotation)"
+  (click)="clickAnnotation(annotation)"
 >
   <span class="annotation-content">
     <pre>{{ annotation.text }}</pre>
@@ -24,7 +24,7 @@
     <span>
       <button
         class="remove-annotation"
-        (click)="removeAnnotation.emit(annotation)"
+        (click)="removeAnnotation(annotation)"
         aria-label="remove annotation"
       ></button>
     </span>
