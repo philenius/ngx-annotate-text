@@ -28,7 +28,11 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   /** An optional CSS class applied to all elements which wrap the annotated parts of the given text. */
   @Input() annotationClass?: string;
 
-  /** An optional Angular component that shall be used for rendering the annotation. Must implement the interface NgxAnnotationRendererComponentInterface.  */
+  /**
+   * An optional Angular component that shall be used for rendering the annotation. By default, it uses the provided `NgxAnnotationRendererComponent`.
+   * You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the
+   * interface `NgxAnnotationRendererComponentInterface`.
+   */
   @Input() annotationRenderComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
 
   /**
@@ -86,10 +90,7 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
       return undefined;
     }
 
-    return {
-      startIndex: this.selectionStart,
-      endIndex: this.selectionEnd,
-    };
+    return { startIndex: this.selectionStart, endIndex: this.selectionEnd };
   }
 
   /**
