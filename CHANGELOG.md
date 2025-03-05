@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 17.3.0
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/29
+
+- Adds the optional input `annotationRendererComponent` that defines which Angular component shall be used for rendering the annotations. By default, it uses the provided `NgxAnnotationRendererComponent`. You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the interface `NgxAnnotationRendererComponentInterface`. This implements feature request https://github.com/philenius/ngx-annotate-text/issues/9.
+- Update dependencies
+
 ## 17.2.0
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/22

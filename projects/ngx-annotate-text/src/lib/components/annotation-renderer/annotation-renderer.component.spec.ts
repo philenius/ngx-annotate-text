@@ -18,6 +18,8 @@ describe('AnnotationRendererComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NgxAnnotationRendererComponent);
     component = fixture.componentInstance;
+    component.clickAnnotation = () => {};
+    component.removeAnnotation = () => {};
     fixture.detectChanges();
   });
 
@@ -84,7 +86,6 @@ describe('AnnotationRendererComponent', () => {
   });
 
   it("should call the callback function 'removeAnnotation' when a user clicks on the remove button", async () => {
-    component.removeAnnotation = () => {};
     spyOn(component, 'removeAnnotation');
 
     const annotation = new Annotation(0, 13, 'City', 'rgb(60, 65, 75)');
@@ -102,7 +103,6 @@ describe('AnnotationRendererComponent', () => {
   });
 
   it("should call the callback function 'clickAnnotation' when a user clicks on the annotation's box", async () => {
-    component.clickAnnotation = () => {};
     spyOn(component, 'clickAnnotation');
 
     const annotation = new Annotation(0, 13, 'City', 'rgb(60, 65, 75)');
@@ -119,7 +119,6 @@ describe('AnnotationRendererComponent', () => {
   });
 
   it("should call the callback function 'clickAnnotation' when the user clicks on the annotation's text", async () => {
-    component.clickAnnotation = () => {};
     spyOn(component, 'clickAnnotation');
 
     const annotation = new Annotation(0, 11, 'City', 'rgb(0, 255, 255)');
@@ -136,7 +135,6 @@ describe('AnnotationRendererComponent', () => {
   });
 
   it("should call the callback function 'clickAnnotation' when the user clicks on the annotation's label", async () => {
-    component.clickAnnotation = () => {};
     spyOn(component, 'clickAnnotation');
 
     const annotation = new Annotation(0, 9, 'City', 'rgb(255, 255, 0)');
