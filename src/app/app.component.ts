@@ -1,16 +1,16 @@
 import { Component, Type, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { NgxAnnotateTextModule } from '../../projects/ngx-annotate-text/src/lib/ngx-annotate-text.module';
 import { Annotation, NgxAnnotateTextComponent } from '../../projects/ngx-annotate-text/src/public-api';
 import { MyAnnotationRendererComponent } from './my-annotation-renderer/my-annotation-renderer.component';
 import { NgxAnnotationRendererComponent } from '../../projects/ngx-annotate-text/src/lib/components/annotation/annotation-renderer.components';
 import { FormsModule } from '@angular/forms';
+import { NgxAnnotationRendererComponentInterface } from '../../projects/ngx-annotate-text/src/lib/models/annotation-renderer-component.model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgxAnnotateTextModule, FormsModule],
+  imports: [NgxAnnotateTextModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -28,9 +28,12 @@ export class AppComponent {
 
   events: string[] = [];
 
-  rendererComponents: Type<any>[] = [NgxAnnotationRendererComponent, MyAnnotationRendererComponent];
+  rendererComponents: Type<NgxAnnotationRendererComponentInterface>[] = [
+    NgxAnnotationRendererComponent,
+    MyAnnotationRendererComponent,
+  ];
 
-  selectedRendererComponent: Type<any> = NgxAnnotationRendererComponent;
+  selectedRendererComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
 
   text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 

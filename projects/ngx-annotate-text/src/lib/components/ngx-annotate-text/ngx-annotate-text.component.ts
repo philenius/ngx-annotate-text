@@ -13,6 +13,7 @@ import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
 import { TokenizerService } from '../../services/tokenizer.service';
 import { NgxAnnotationRendererComponent } from '../annotation/annotation-renderer.components';
+import { NgxAnnotationRendererComponentInterface } from '../../models/annotation-renderer-component.model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -27,7 +28,8 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   /** An optional CSS class applied to all elements which wrap the annotated parts of the given text. */
   @Input() annotationClass?: string;
 
-  @Input() annotationRenderComponent: Type<any> = NgxAnnotationRendererComponent;
+  /** An optional Angular component that shall be used for rendering the annotation. Must implement the interface NgxAnnotationRendererComponentInterface.  */
+  @Input() annotationRenderComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
 
   /**
    * Determines whether annotations shall have a small button in the top right corner so that the user can

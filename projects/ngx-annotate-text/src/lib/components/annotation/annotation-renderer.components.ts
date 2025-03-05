@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Annotation } from '../../models/annotation.model';
+import { NgxAnnotationRendererComponentInterface } from '../../models/annotation-renderer-component.model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -7,7 +8,7 @@ import { Annotation } from '../../models/annotation.model';
   templateUrl: './annotation-renderer.component.html',
   styleUrls: ['./annotation-renderer.component.css'],
 })
-export class NgxAnnotationRendererComponent {
+export class NgxAnnotationRendererComponent implements NgxAnnotationRendererComponentInterface {
   @Input({ required: true }) annotation!: Annotation;
   @Input() removable = true;
   @Input() clickAnnotation!: (annotation: Annotation) => void;
