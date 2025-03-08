@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { NgxAnnotationRendererComponentInterface } from '../../projects/ngx-annotate-text/src/lib/models/annotation-renderer-component.model';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   standalone: true,
   imports: [NgxAnnotateTextModule, FormsModule],

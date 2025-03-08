@@ -13,7 +13,9 @@ describe('MyAnnotationRendererComponent', () => {
     fixture = TestBed.createComponent(MyAnnotationRendererComponent);
     component = fixture.componentInstance;
     component.annotation = new Annotation(7, 12, 'noun', 'red');
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     component.clickAnnotation = () => {};
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     component.removeAnnotation = () => {};
     fixture.detectChanges();
   });

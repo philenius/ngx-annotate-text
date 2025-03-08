@@ -120,7 +120,8 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/ngx-annotate-text/**/*.ts", "projects/ngx-annotate-text/**/*.html"]
+            "lintFilePatterns": ["projects/ngx-annotate-text/**/*.ts", "projects/ngx-annotate-text/**/*.html"],
+            "eslintConfig": "projects/ngx-annotate-text/eslint.config.js"
           }
         }
       }
