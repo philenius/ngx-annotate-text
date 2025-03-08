@@ -17,7 +17,7 @@ export class MyAnnotationRendererComponent implements NgxAnnotationRendererCompo
   @Input() clickAnnotation!: (annotation: Annotation) => void;
   @Input() removeAnnotation!: (annotation: Annotation) => void;
 
-  protected popupEnabled: boolean = false;
+  protected popupEnabled = false;
 
   onMouseEnter(): void {
     this.popupEnabled = true;

@@ -18,8 +18,8 @@ describe('AnnotationRendererComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NgxAnnotationRendererComponent);
     component = fixture.componentInstance;
-    component.clickAnnotation = () => {};
-    component.removeAnnotation = () => {};
+    component.clickAnnotation = jasmine.createSpy('clickAnnotation');
+    component.removeAnnotation = jasmine.createSpy('removeAnnotation');
     fixture.detectChanges();
   });
 
@@ -86,8 +86,6 @@ describe('AnnotationRendererComponent', () => {
   });
 
   it("should call the callback function 'removeAnnotation' when a user clicks on the remove button", async () => {
-    spyOn(component, 'removeAnnotation');
-
     const annotation = new Annotation(0, 13, 'City', 'rgb(60, 65, 75)');
     annotation.text = 'San Francisco';
     component.annotation = annotation;
@@ -97,14 +95,11 @@ describe('AnnotationRendererComponent', () => {
 
     fixture.nativeElement.querySelector('button.remove-annotation').click();
 
-    fixture.whenStable().then(() => {
-      expect(component.removeAnnotation).toHaveBeenCalledWith(annotation);
-    });
+    await fixture.whenStable();
+    expect(component.removeAnnotation).toHaveBeenCalledWith(annotation);
   });
 
   it("should call the callback function 'clickAnnotation' when a user clicks on the annotation's box", async () => {
-    spyOn(component, 'clickAnnotation');
-
     const annotation = new Annotation(0, 13, 'City', 'rgb(60, 65, 75)');
     annotation.text = 'San Francisco';
     component.annotation = annotation;
@@ -113,14 +108,11 @@ describe('AnnotationRendererComponent', () => {
 
     fixture.nativeElement.querySelector('button.annotation-parent').click();
 
-    fixture.whenStable().then(() => {
-      expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
-    });
+    await fixture.whenStable();
+    expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
   });
 
   it("should call the callback function 'clickAnnotation' when the user clicks on the annotation's text", async () => {
-    spyOn(component, 'clickAnnotation');
-
     const annotation = new Annotation(0, 11, 'City', 'rgb(0, 255, 255)');
     annotation.text = 'Los Angeles';
     component.annotation = annotation;
@@ -129,14 +121,11 @@ describe('AnnotationRendererComponent', () => {
 
     fixture.nativeElement.querySelector('span.annotation-content').click();
 
-    fixture.whenStable().then(() => {
-      expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
-    });
+    await fixture.whenStable();
+    expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
   });
 
   it("should call the callback function 'clickAnnotation' when the user clicks on the annotation's label", async () => {
-    spyOn(component, 'clickAnnotation');
-
     const annotation = new Annotation(0, 9, 'City', 'rgb(255, 255, 0)');
     annotation.text = 'Frankfurt';
     component.annotation = annotation;
@@ -145,8 +134,7 @@ describe('AnnotationRendererComponent', () => {
 
     fixture.nativeElement.querySelector('span.annotation-label').click();
 
-    fixture.whenStable().then(() => {
-      expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
-    });
+    await fixture.whenStable();
+    expect(component.clickAnnotation).toHaveBeenCalledWith(annotation);
   });
 });

@@ -104,7 +104,7 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 | Input                       | Description                                                  | Type               | Default value |
 | :-------------------------- | ------------------------------------------------------------ | ------------------ | :------------ |
 | annotations                 | Represents the parts of the given text which shall be annotated. | `Annotation[]`     | `[]`          |
-| annotationClass             | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | `string|undefined` | `undefined`   |
+| annotationClass             | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | `string\|undefined` | `undefined`   |
 | annotationRendererComponent | An optional Angular component that shall be used for rendering the annotation. By default, it uses the provided `NgxAnnotationRendererComponent`. You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the interface `NgxAnnotationRendererComponentInterface`. | `NgxAnnotationRendererComponentInterface` | `NgxAnnotationRendererComponent` |
 | removable                   | Determines whether annotations shall have a small button in the top right corner so that the user can remove an annotation. | `boolean`          | `true`        |
 | text                        | The text which shall be displayed and annotated.             | `string`           | empty string  |
@@ -129,12 +129,17 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^17
+npm install -g @angular/cli@^18
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-ng add @angular-eslint/schematics
-npm install prettier
+ng add angular-eslint@^18
+ng g angular-eslint:add-eslint-to-project ngx-annotate-text-workspace
+ng g angular-eslint:add-eslint-to-project ngx-annotate-text
+npm install prettier --save-dev
+ng build ngx-annotate-text
+ng lint
+ng test ngx-annotate-text
 ```
 
 ### Build
