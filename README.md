@@ -135,6 +135,9 @@ cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
 ng add @angular-eslint/schematics
 npm install prettier
+ng build ngx-annotate-text
+ng lint
+ng test ngx-annotate-text
 ```
 
 ### Build
