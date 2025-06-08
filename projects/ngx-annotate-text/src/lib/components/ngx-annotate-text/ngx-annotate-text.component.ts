@@ -14,12 +14,15 @@ import { ISelection } from '../../models/selection.model';
 import { TokenizerService } from '../../services/tokenizer.service';
 import { NgxAnnotationRendererComponent } from '../annotation-renderer/annotation-renderer.components';
 import { NgxAnnotationRendererComponentInterface } from '../../models/annotation-renderer-component.model';
+import { NgComponentOutlet } from '@angular/common';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngx-annotate-text',
   templateUrl: './ngx-annotate-text.component.html',
   styleUrls: ['./ngx-annotate-text.component.css'],
+  imports: [NgComponentOutlet],
+  standalone: true,
 })
 export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   /** Represents the parts of the given text which shall be annotated. */

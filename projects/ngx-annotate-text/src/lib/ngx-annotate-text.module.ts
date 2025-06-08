@@ -4,8 +4,8 @@ import { NgxAnnotationRendererComponent } from './components/annotation-renderer
 import { NgxAnnotateTextComponent } from './components/ngx-annotate-text/ngx-annotate-text.component';
 
 @NgModule({
-  declarations: [NgxAnnotationRendererComponent, NgxAnnotateTextComponent],
-  imports: [CommonModule, NgComponentOutlet],
-  exports: [NgxAnnotateTextComponent, NgxAnnotationRendererComponent],
+  declarations: [],
+  imports: [CommonModule, NgComponentOutlet, NgxAnnotationRendererComponent, NgxAnnotateTextComponent],
+  exports: [NgxAnnotationRendererComponent, NgxAnnotateTextComponent],
 })
 export class NgxAnnotateTextModule {}

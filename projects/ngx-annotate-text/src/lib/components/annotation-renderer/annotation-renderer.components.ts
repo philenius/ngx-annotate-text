@@ -7,6 +7,7 @@ import { NgxAnnotationRendererComponentInterface } from '../../models/annotation
   selector: 'ngx-annotation-renderer',
   templateUrl: './annotation-renderer.component.html',
   styleUrls: ['./annotation-renderer.component.css'],
+  standalone: true,
 })
 export class NgxAnnotationRendererComponent implements NgxAnnotationRendererComponentInterface {
   @Input({ required: true }) annotation!: Annotation;

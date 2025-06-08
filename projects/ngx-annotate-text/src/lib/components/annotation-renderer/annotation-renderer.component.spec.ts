@@ -12,10 +12,8 @@ describe('AnnotationRendererComponent', () => {
   const getAnnotationParentElement = (): HTMLElement => fixture.nativeElement.querySelector('button.annotation-parent');
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({ declarations: [NgxAnnotationRendererComponent] }).compileComponents();
-  });
+    await TestBed.configureTestingModule({ imports: [NgxAnnotationRendererComponent] }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NgxAnnotationRendererComponent);
     component = fixture.componentInstance;
     component.clickAnnotation = jasmine.createSpy('clickAnnotation');
