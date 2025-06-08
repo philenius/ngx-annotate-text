@@ -1,12 +1,12 @@
 {
   "name": "ngx-annotate-text",
-  "version": "18.0.0",
+  "version": "19.0.0",
   "author": "Philipp Perez, (https://philenius.github.io)",
   "license": "MIT",
   "description": "This Angular component library is perfect for tasks like visualizing named entity recognition, part of speech tagging, or annotating text datasets. It allows for interactively highlighting and annotating parts of text.",
   "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

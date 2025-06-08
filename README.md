@@ -1,4 +1,3 @@
-
 # ngx-annotate-text
 
 <img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/actions/workflow/status/philenius/ngx-annotate-text/main.yml?branch=main&style=for-the-badge"> <a href="https://github.com/philenius/ngx-annotate-text/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/philenius/ngx-annotate-text?style=for-the-badge"></a> <img alt="GitHub" src="https://img.shields.io/github/license/philenius/ngx-annotate-text?style=for-the-badge"> <img alt="npm" src="https://img.shields.io/npm/v/ngx-annotate-text?style=for-the-badge">
@@ -129,11 +128,11 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^18
+npm install -g @angular/cli@^19
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-ng add angular-eslint@^18
+ng add angular-eslint@^19
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text-workspace
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text
 npm install prettier --save-dev
