@@ -8,6 +8,7 @@ import {
   Output,
   SimpleChanges,
   Type,
+  inject,
 } from '@angular/core';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
@@ -25,6 +26,9 @@ import { NgComponentOutlet } from '@angular/common';
   standalone: true,
 })
 export class NgxAnnotateTextComponent implements OnInit, OnChanges {
+  private elementRef: ElementRef = inject(ElementRef);
+  private tokenService: TokenizerService = inject(TokenizerService);
+
   /** Represents the parts of the given text which shall be annotated. */
   @Input() annotations: Annotation[] = [];
 
@@ -60,11 +64,6 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
   tokens: (string | Annotation)[] = [];
   private selectionStart?: number;
   private selectionEnd?: number;
-
-  constructor(
-    private elementRef: ElementRef,
-    private tokenService: TokenizerService,
-  ) {}
 
   ngOnInit(): void {
     this.tokens = this.tokenService.splitTextIntoTokens(this.text, this.annotations);
