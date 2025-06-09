@@ -1,4 +1,3 @@
- 
 import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
@@ -12,7 +11,9 @@ describe('NgxAnnotateTextComponent', () => {
   let fixture: ComponentFixture<NgxAnnotateTextComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({ declarations: [NgxAnnotateTextComponent, NgxAnnotationRendererComponent] });
+    await TestBed.configureTestingModule({
+      imports: [NgxAnnotateTextComponent, NgxAnnotationRendererComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NgxAnnotateTextComponent);
     component = fixture.componentInstance;

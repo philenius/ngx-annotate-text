@@ -56,7 +56,7 @@
     <h2 class="mb-3 display-5">Annotations</h2>
 
     <ul class="list-group" style="height: 15rem; overflow-y: auto">
-      @for (a of annotations.reverse(); track $index) {
+      @for (a of annotations.slice().reverse(); track $index) {
         <li class="list-group-item">
           start: {{ a.startIndex }}, end: {{ a.endIndex }}, text: "{{ a.text }}", label: {{ a.label }}
         </li>
@@ -68,7 +68,7 @@
     <h2 class="mb-3 display-5">Events</h2>
 
     <ul class="list-group" style="height: 15rem; overflow-y: auto">
-      @for (e of events.reverse(); track $index) {
+      @for (e of events.slice().reverse(); track $index) {
         <li class="list-group-item">
           {{ e }}
         </li>

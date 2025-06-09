@@ -1,15 +1,15 @@
-<button
-  *ngIf="annotation"
-  class="annotation-parent"
-  [style.border-color]="annotation.color"
-  [style.background-color]="annotation.color"
-  (click)="clickAnnotation(annotation)"
->
-  <span class="annotation-content">
-    <pre>{{ annotation.text }}</pre>
-  </span>
+@if (annotation) {
+  <button
+    class="annotation-parent"
+    [style.border-color]="annotation.color"
+    [style.background-color]="annotation.color"
+    (click)="clickAnnotation(annotation)"
+  >
+    <span class="annotation-content">
+      <pre>{{ annotation.text }}</pre>
+    </span>
 
-  <!-- Instead of setting the property "innerText" of this HTML element, we set "data-label". In CSS, we can then
+    <!-- Instead of setting the property "innerText" of this HTML element, we set "data-label". In CSS, we can then
         reference the content of this property and can use the CSS pseudo- element "::after" to insert the content
         of "data-label" as text into the DOM. What's the advantage of this? At first, I tried to use the "innerText"
         property of this HTML element to visualize the annotation's label. Whenever the user selected a range of the
@@ -17,16 +17,19 @@
         extract which text range the user actually selected. By using the CSS pseudo-class "::after", we can prevent
         the annotations' labels from being included into the selected text range. -->
 
-  <span class="annotation-label" [attr.data-label]="annotation.label" [style.background-color]="annotation.color">
-  </span>
-
-  <span class="annotation-button" *ngIf="removable">
-    <span>
-      <button
-        class="remove-annotation"
-        (click)="removeAnnotation(annotation)"
-        aria-label="remove annotation"
-      ></button>
+    <span class="annotation-label" [attr.data-label]="annotation.label" [style.background-color]="annotation.color">
     </span>
-  </span>
-</button>
+
+    @if (removable) {
+      <span class="annotation-button">
+        <span>
+          <button
+            class="remove-annotation"
+            (click)="removeAnnotation(annotation)"
+            aria-label="remove annotation"
+          ></button>
+        </span>
+      </span>
+    }
+  </button>
+}
