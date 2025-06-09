@@ -33,25 +33,30 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
    npm install ngx-annotate-text
    ```
 
-2. Import the Angular module `NgxAnnotateTextModule`:
+2. In your Angular component import the `NgxAnnotateTextComponent` and create two properties for the text to be displayed and the list of annotations:
 
    ```typescript
-   import { BrowserModule } from "@angular/platform-browser";
-   import { NgModule } from "@angular/core";
+   import { Annotation, NgxAnnotateTextComponent } from 'ngx-annotate-text';
 
-   import { AppComponent } from "./app.component";
-   import { NgxAnnotateTextModule } from "ngx-annotate-text";
-
-   @NgModule({
-     declarations: [AppComponent],
-     imports: [BrowserModule, NgxAnnotateTextModule],
-     providers: [],
-     bootstrap: [AppComponent],
+   @Component({
+     selector: 'app-root',
+     imports: [NgxAnnotateTextComponent],
+     templateUrl: './app.component.html',
+     styleUrl: './app.component.css',
    })
-   export class AppModule {}
+   export class AppComponent {
+     annotations: Annotation[] = [
+       new Annotation(3, 11, 'Date', '#0d6efd'),
+       new Annotation(36, 45, 'City', '#dc3545'),
+       new Annotation(47, 52, 'Country', '#198754'),
+       new Annotation(77, 85, 'Time', '#6c757d'),
+     ];
+
+     text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+   }
    ```
 
-3. Add the component `ngx-annotate-text` to your template:
+3. Add the component `ngx-annotate-text` to your component's template:
 
    ```html
    <ngx-annotate-text
@@ -64,31 +69,7 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
    </ngx-annotate-text>
    ```
 
-4. Create properties in your component class for the text to be annotated and an (empty) array of annotations:
-
-   ```typescript
-   import { Component, ViewChild } from "@angular/core";
-   import { Annotation, NgxAnnotateTextComponent } from "ngx-annotate-text";
-
-   @Component({
-     selector: "app-root",
-     templateUrl: "./app.component.html",
-     styleUrls: ["./app.component.css"],
-   })
-   export class AppComponent {
-     text: string =
-       "On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.";
-
-     annotations: Annotation[] = [
-       new Annotation(3, 11, "Date", "#0069d9"),
-       new Annotation(36, 45, "City", "#dc3545"),
-       new Annotation(47, 52, "Country", "#28a745"),
-       new Annotation(77, 85, "Time", "#5a6268"),
-     ];
-   }
-   ```
-
-5. Having set `annotationClass="my-annotation"`, a custom CSS styling can be applied by combining `::ng-deep` with the class selector `.my-annotation`, e.g., to remove the border-radius:
+3. Having set `annotationClass="my-annotation"`, a custom CSS styling can be applied by combining `::ng-deep` with the class selector `.my-annotation`, e.g., to remove the border-radius:
    ```css
    ::ng-deep .my-annotation .annotation-parent,
    ::ng-deep .my-annotation .annotation-content {
@@ -122,6 +103,8 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 | ------------------------------------ | ------------------------------------------------------------ | ---------------------- |
 | getCurrentTextSelection              | Returns the start index and end index of the currently selected text range. Returns `undefined` if no text is currently selected. | `ISelection|undefined` |
 | isOverlappingWithExistingAnnotations | Returns true if the given text selection is (partially) overlapping with an existing annotation. Returns false otherwise. | `boolean`              |
+
+---
 
 ## Development
 

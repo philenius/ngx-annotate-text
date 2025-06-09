@@ -1,5 +1,4 @@
 import { Component, Type, ViewChild } from '@angular/core';
-import { NgxAnnotateTextModule } from '../../projects/ngx-annotate-text/src/lib/ngx-annotate-text.module';
 import { Annotation, NgxAnnotateTextComponent } from '../../projects/ngx-annotate-text/src/public-api';
 import { MyAnnotationRendererComponent } from './my-annotation-renderer/my-annotation-renderer.component';
 import { NgxAnnotationRendererComponent } from '../../projects/ngx-annotate-text/src/lib/components/annotation-renderer/annotation-renderer.components';
@@ -9,7 +8,7 @@ import { NgxAnnotationRendererComponentInterface } from '../../projects/ngx-anno
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgxAnnotateTextModule, FormsModule],
+  imports: [NgxAnnotateTextComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
