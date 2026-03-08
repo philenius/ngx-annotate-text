@@ -7,12 +7,11 @@ import { NgxAnnotationRendererComponentInterface } from '../../projects/ngx-anno
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [NgxAnnotateTextComponent, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class AppComponent {
+export class App {
   @ViewChild('annotateText') ngxAnnotateText?: NgxAnnotateTextComponent;
 
   annotations: Annotation[] = [

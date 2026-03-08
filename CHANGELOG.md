@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 21.0.0.
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/46
+
+- Upgrade to Angular 21.0.0
+
 ## 20.0.0
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/35

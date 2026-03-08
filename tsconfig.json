@@ -8,7 +8,9 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "ngx-annotate-text": ["./dist/ngx-annotate-text"]
+      "ngx-annotate-text": [
+        "./dist/ngx-annotate-text"
+      ]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -22,7 +24,6 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
     "strictTemplates": true
   },
   "files": [],

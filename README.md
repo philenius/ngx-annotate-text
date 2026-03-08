@@ -111,11 +111,11 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^20
+npm install -g @angular/cli@^21
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-ng add angular-eslint@^20
+ng add angular-eslint@^21
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text-workspace
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text
 npm install prettier --save-dev
@@ -134,11 +134,11 @@ Run `ng serve --open` to start the demo app in your browser.
 
 ### Running linting tools
 
-Run `ng lint ngx-annotate-text` to execute ESLint.
+Run `ng lint` to execute ESLint.
 
 ### Running unit tests
 
-Run `ng test ngx-annotate-text --code-coverage` to execute the unit tests via [Karma](https://karma-runner.github.io). Don't forget to set the environment variable for where to find Chrome / Chromium like so: `export CHROME_BIN=/snap/bin/chromium`.
+Run `ng test --watch=true --coverage --ui ngx-annotate-text` to execute the unit tests via Vitest.
 
 ### Publish library as an npm package
 

@@ -21,10 +21,10 @@ jobs:
         run: npm run build:lib:prod
 
       - name: Lint
-        run: npm run lint ngx-annotate-text
+        run: npm run lint
         
       - name: Test
-        run: npm run test-headless ngx-annotate-text
+        run: npm run test-headless
         
       - name: Publish to npmjs.com
         uses: JS-DevTools/npm-publish@v1
