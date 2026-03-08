@@ -7,38 +7,47 @@
     "build": "ng build",
     "build:lib:prod": "ng build ngx-annotate-text --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "lint": "ng lint",
-    "test-headless": "ng test --watch=false --browsers=ChromeHeadless --code-coverage"
+    "test": "ng test --watch=true --coverage --ui ngx-annotate-text",
+    "test-headless": "ng test --watch=false --coverage"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
   },
   "private": true,
+  "packageManager": "npm@11.7.0",
   "dependencies": {
-    "@angular/common": "^20.0.0",
-    "@angular/compiler": "^20.0.0",
-    "@angular/core": "^20.0.0",
-    "@angular/forms": "^20.0.0",
-    "@angular/platform-browser": "^20.0.0",
-    "@angular/router": "^20.0.0",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/router": "^21.0.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.0.1",
-    "@angular/cli": "^20.0.1",
-    "@angular/compiler-cli": "^20.0.0",
-    "@types/jasmine": "~5.1.0",
-    "angular-eslint": "20.0.0",
-    "eslint": "^9.28.0",
-    "jasmine-core": "~5.7.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
-    "ng-packagr": "^20.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "~5.8.2",
-    "typescript-eslint": "8.33.1"
+    "@angular/build": "^21.0.5",
+    "@angular/cli": "^21.0.5",
+    "@angular/compiler-cli": "^21.0.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/ui": "^4.0.18",
+    "angular-eslint": "^21.1.0",
+    "eslint": "^9.39.2",
+    "jsdom": "^27.1.0",
+    "ng-packagr": "^21.0.0",
+    "prettier": "^3.7.4",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.52.0",
+    "vitest": "^4.0.18"
   }
 }

@@ -1,4 +1,3 @@
-import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
 import { ISelection } from '../../models/selection.model';
@@ -20,7 +19,8 @@ describe('NgxAnnotateTextComponent', () => {
   });
 
   it('should display the whole text when there are no initial annotations', () => {
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+    const text =
+      'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
     component.text = text;
     fixture.detectChanges();
@@ -31,14 +31,15 @@ describe('NgxAnnotateTextComponent', () => {
 
   it('should display the whole given text as a single annotated token', () => {
     const annotations = [new Annotation(0, 86, 'Annotation', 'red')];
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+    const text =
+      'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
     component.annotations = annotations;
     component.text = text;
     fixture.detectChanges();
 
     expect(component.tokens.length).toBe(annotations.length);
-    expect(component.tokens[0] instanceof Annotation).toBeTrue();
+    expect(component.tokens[0]).toBeInstanceOf(Annotation);
     expect((component.tokens[0] as Annotation).text).toBe(text);
   });
 
@@ -46,8 +47,8 @@ describe('NgxAnnotateTextComponent', () => {
     const annotation: Annotation = new Annotation(0, 5, 'Token', 'black');
     annotation.text = 'Hello';
 
-    expect(component.isAnnotation(annotation)).toBeTrue();
-    expect(component.isAnnotation('Hello')).toBeFalse();
+    expect(component.isAnnotation(annotation)).toBe(true);
+    expect(component.isAnnotation('Hello')).toBe(false);
   });
 
   describe('toRecord()', () => {
@@ -58,8 +59,8 @@ describe('NgxAnnotateTextComponent', () => {
       expect(component.toRecord(annotation)).toEqual({
         annotation: annotation,
         removable: true,
-        clickAnnotation: jasmine.any(Function),
-        removeAnnotation: jasmine.any(Function),
+        clickAnnotation: expect.any(Function),
+        removeAnnotation: expect.any(Function),
       });
     });
 
@@ -71,23 +72,26 @@ describe('NgxAnnotateTextComponent', () => {
       expect(component.toRecord(annotation)).toEqual({
         annotation: annotation,
         removable: false,
-        clickAnnotation: jasmine.any(Function),
-        removeAnnotation: jasmine.any(Function),
+        clickAnnotation: expect.any(Function),
+        removeAnnotation: expect.any(Function),
       });
     });
 
     it('should not convert an instance of string', () => {
       const annotation: Annotation | string = 'Hello';
 
-      expect(() => component.toRecord(annotation)).toThrowError('Cannot convert token of type string to type Record');
+      expect(() => component.toRecord(annotation)).toThrowError(
+        'Cannot convert token of type string to type Record',
+      );
     });
   });
 
   it('should emit an empty list of annotations if the only annotation has been removed', () => {
-    spyOn(component.annotationsChange, 'emit');
-    spyOn(component.removeAnnotation, 'emit');
+    vi.spyOn(component.annotationsChange, 'emit');
+    vi.spyOn(component.removeAnnotation, 'emit');
     const annotations = [new Annotation(36, 45, 'City', 'red')];
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+    const text =
+      'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
     component.annotations = annotations;
     component.text = text;
@@ -100,10 +104,14 @@ describe('NgxAnnotateTextComponent', () => {
   });
 
   it('should emit the list of remaining annotations if an annotation has been removed', () => {
-    spyOn(component.annotationsChange, 'emit');
-    spyOn(component.removeAnnotation, 'emit');
-    const annotations = [new Annotation(36, 45, 'City', 'red'), new Annotation(47, 52, 'Country', 'red')];
-    const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+    vi.spyOn(component.annotationsChange, 'emit');
+    vi.spyOn(component.removeAnnotation, 'emit');
+    const annotations = [
+      new Annotation(36, 45, 'City', 'red'),
+      new Annotation(47, 52, 'Country', 'red'),
+    ];
+    const text =
+      'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
     component.annotations = annotations;
     component.text = text;
@@ -123,8 +131,7 @@ describe('NgxAnnotateTextComponent', () => {
     expect(component.tokens.length).toBe(2);
     expect((component.tokens[0] as Annotation).text).toBe('Hello');
 
-    component.text = 'Now, with an updated message.';
-    component.ngOnChanges({ text: new SimpleChange('Hello, world', 'Now, with an updated message.', false) });
+    fixture.componentRef.setInput('text', 'Now, with an updated message.');
     fixture.detectChanges();
 
     expect(component.tokens.length).toBe(2);
@@ -139,8 +146,10 @@ describe('NgxAnnotateTextComponent', () => {
     expect(component.tokens.length).toBe(2);
     expect((component.tokens[0] as Annotation).text).toBe('Hello');
 
-    component.annotations = [new Annotation(0, 5, 'Token1', 'red'), new Annotation(7, 12, 'Token2', 'red')];
-    component.ngOnChanges({ annotations: new SimpleChange([], [], false) });
+    fixture.componentRef.setInput('annotations', [
+      new Annotation(0, 5, 'Token1', 'red'),
+      new Annotation(7, 12, 'Token2', 'red'),
+    ]);
     fixture.detectChanges();
 
     expect(component.tokens.length).toBe(3);
@@ -151,7 +160,8 @@ describe('NgxAnnotateTextComponent', () => {
 
   describe('getCurrentTextSelection()', () => {
     it('should return `undefined` if no text is selected', () => {
-      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      const text =
+        'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
       component.text = text;
       const selection = window.getSelection();
@@ -162,7 +172,8 @@ describe('NgxAnnotateTextComponent', () => {
     });
 
     it('should return the correct boundaries if the whole text is selected', () => {
-      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      const text =
+        'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
       component.text = text;
       fixture.detectChanges();
@@ -180,7 +191,8 @@ describe('NgxAnnotateTextComponent', () => {
     });
 
     it('should return the correct boundaries if the beginning of the text is selected', () => {
-      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      const text =
+        'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
       component.text = text;
       fixture.detectChanges();
@@ -193,7 +205,8 @@ describe('NgxAnnotateTextComponent', () => {
     });
 
     it('should return the correct boundaries if the middle of the text is selected', () => {
-      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      const text =
+        'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
       component.text = text;
       fixture.detectChanges();
@@ -206,7 +219,8 @@ describe('NgxAnnotateTextComponent', () => {
     });
 
     it('should return the correct boundaries if the end of the text is selected', () => {
-      const text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+      const text =
+        'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 
       component.text = text;
       fixture.detectChanges();
@@ -229,7 +243,7 @@ describe('NgxAnnotateTextComponent', () => {
         new Annotation(16, 22, 'Article', 'yellow'),
       ];
 
-      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeFalse();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBe(false);
     });
 
     /**
@@ -241,7 +255,7 @@ describe('NgxAnnotateTextComponent', () => {
 
       component.annotations = [new Annotation(5, 12, 'Noun', 'blue')];
 
-      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBe(true);
     });
 
     /**
@@ -253,7 +267,7 @@ describe('NgxAnnotateTextComponent', () => {
 
       component.annotations = [new Annotation(4, 8, 'Verb', 'red')];
 
-      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBe(true);
     });
 
     /**
@@ -265,7 +279,7 @@ describe('NgxAnnotateTextComponent', () => {
 
       component.annotations = [new Annotation(4, 8, 'Adjective', 'orange')];
 
-      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBe(true);
     });
 
     /**
@@ -277,7 +291,7 @@ describe('NgxAnnotateTextComponent', () => {
 
       component.annotations = [new Annotation(4, 10, 'Adjective', 'orange')];
 
-      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBe(true);
     });
 
     /**
@@ -289,7 +303,7 @@ describe('NgxAnnotateTextComponent', () => {
 
       component.annotations = [new Annotation(6, 8, 'Adjective', 'orange')];
 
-      expect(component.isOverlappingWithExistingAnnotations(selection)).toBeTrue();
+      expect(component.isOverlappingWithExistingAnnotations(selection)).toBe(true);
     });
   });
 

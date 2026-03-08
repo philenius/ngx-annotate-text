@@ -23,10 +23,10 @@ jobs:
         run: npm run build:lib:prod
 
       - name: Lint
-        run: npm run lint ngx-annotate-text
+        run: npm run lint
 
       - name: Test
-        run: npm run test-headless ngx-annotate-text
+        run: npm run test-headless
       
       - name: Build Angular demo app
         run: npm run build
