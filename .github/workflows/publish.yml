@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
-          node-version: '22.x'
+          node-version: '24.x'
 
       - name: Install dependencies
         run: npm ci
@@ -27,7 +27,7 @@ jobs:
         run: npm run test-headless
         
       - name: Publish to npmjs.com
-        uses: JS-DevTools/npm-publish@v1
+        uses: JS-DevTools/npm-publish@v4
         with:
           package: ./dist/ngx-annotate-text/package.json
           token: ${{ secrets.NPM_TOKEN }}
