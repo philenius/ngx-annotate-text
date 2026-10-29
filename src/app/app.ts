@@ -1,5 +1,8 @@
 import { Component, Type, ViewChild } from '@angular/core';
-import { Annotation, NgxAnnotateTextComponent } from '../../projects/ngx-annotate-text/src/public-api';
+import {
+  Annotation,
+  NgxAnnotateTextComponent,
+} from '../../projects/ngx-annotate-text/src/public-api';
 import { MyAnnotationRendererComponent } from './my-annotation-renderer/my-annotation-renderer.component';
 import { NgxAnnotationRendererComponent } from '../../projects/ngx-annotate-text/src/lib/components/annotation-renderer/annotation-renderer.components';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +12,7 @@ import { NgxAnnotationRendererComponentInterface } from '../../projects/ngx-anno
   selector: 'app-root',
   imports: [NgxAnnotateTextComponent, FormsModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   @ViewChild('annotateText') ngxAnnotateText?: NgxAnnotateTextComponent;
@@ -30,7 +33,8 @@ export class App {
     MyAnnotationRendererComponent,
   ];
 
-  selectedRendererComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
+  selectedRendererComponent: Type<NgxAnnotationRendererComponentInterface> =
+    NgxAnnotationRendererComponent;
 
   text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
 

@@ -111,11 +111,11 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^21
+npm install -g @angular/cli@^22
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-ng add angular-eslint@^21
+ng add angular-eslint@^22
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text-workspace
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text
 npm install prettier --save-dev
@@ -138,7 +138,10 @@ Run `ng lint` to execute ESLint.
 
 ### Running unit tests
 
-Run `ng test --watch=true --coverage --ui ngx-annotate-text` to execute the unit tests via Vitest.
+Unit tests run via Vitest:
+
+- `npm test` runs the library's tests in watch mode with a coverage report and the Vitest UI (equivalent to `ng test --watch=true --coverage --ui ngx-annotate-text`).
+- `npm run test-headless` runs the tests of both the library and the demo app once, with coverage. This is what CI runs.
 
 ### Publish library as an npm package
 

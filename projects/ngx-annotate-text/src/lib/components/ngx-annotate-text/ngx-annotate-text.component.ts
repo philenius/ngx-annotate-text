@@ -40,7 +40,8 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    * You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the
    * interface `NgxAnnotationRendererComponentInterface`.
    */
-  @Input() annotationRendererComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
+  @Input() annotationRendererComponent: Type<NgxAnnotationRendererComponentInterface> =
+    NgxAnnotationRendererComponent;
 
   /**
    * Determines whether annotations shall have a small button in the top right corner so that the user can
@@ -104,7 +105,10 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    */
   public isOverlappingWithExistingAnnotations(selection: ISelection): boolean {
     const overlappingAnnotation = this.annotations.find((annotation) => {
-      return Math.max(annotation.startIndex, selection.startIndex) < Math.min(annotation.endIndex, selection.endIndex);
+      return (
+        Math.max(annotation.startIndex, selection.startIndex) <
+        Math.min(annotation.endIndex, selection.endIndex)
+      );
     });
     return overlappingAnnotation != undefined;
   }

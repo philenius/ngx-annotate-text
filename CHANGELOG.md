@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 22.0.0
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/52
+
+- Upgrade to Angular 22.0.0
+- Components now use the Angular 22 default change detection strategy `OnPush`
+
 ## 21.0.0.
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/46
