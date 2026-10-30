@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Annotation } from '../../models/annotation.model';
 import { NgxAnnotationRendererComponentInterface } from '../../models/annotation-renderer-component.model';
@@ -171,6 +171,22 @@ describe('NgxAnnotateTextComponent', () => {
       fixture.detectChanges();
 
       expect(component.getCurrentTextSelection()).toBeUndefined();
+    });
+
+    it('should return `undefined` if the text is selected outside of the shadow root containing the component', () => {
+      const hostFixture = TestBed.createComponent(ShadowDomHostComponent);
+      hostFixture.detectChanges();
+      const outside = document.createElement('p');
+      outside.textContent = 'Text outside of the shadow root';
+      document.body.appendChild(outside);
+
+      const range = document.createRange();
+      range.selectNodeContents(outside);
+      window.getSelection()!.removeAllRanges();
+      window.getSelection()!.addRange(range);
+
+      expect(hostFixture.componentInstance.annotateText.getCurrentTextSelection()).toBeUndefined();
+      outside.remove();
     });
 
     it('should return the correct boundaries if the whole text is selected', () => {
@@ -408,6 +424,15 @@ describe('NgxAnnotateTextComponent', () => {
     window.getSelection()!.addRange(range);
   }
 });
+
+@Component({
+  imports: [NgxAnnotateTextComponent],
+  encapsulation: ViewEncapsulation.ShadowDom,
+  template: `<ngx-annotate-text text="Text inside of the shadow root" />`,
+})
+class ShadowDomHostComponent {
+  @ViewChild(NgxAnnotateTextComponent) annotateText!: NgxAnnotateTextComponent;
+}
 
 @Component({
   template: `<button (click)="clickAnnotation(annotation)">{{ annotation.text }}</button>

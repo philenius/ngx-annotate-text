@@ -141,8 +141,12 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
 
   private updateTextSelection(): void {
     const selection = window.getSelection();
-    if (selection != null && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
+    const range = selection != null && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+    // A selection in another document or shadow root cannot be compared with this component's DOM.
+    if (
+      range &&
+      range.startContainer.getRootNode() === this.elementRef.nativeElement.getRootNode()
+    ) {
       this.selectionStart = this.toTextIndex(range.startContainer, range.startOffset, false);
       this.selectionEnd = this.toTextIndex(range.endContainer, range.endOffset, true);
     } else {
