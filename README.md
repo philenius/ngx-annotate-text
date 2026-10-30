@@ -69,7 +69,21 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
    </ngx-annotate-text>
    ```
 
-3. Having set `annotationClass="my-annotation"`, a custom CSS styling can be applied by combining `::ng-deep` with the class selector `.my-annotation`, e.g., to remove the border-radius:
+4. To add, change, or remove annotations, always assign a new array. The component uses the `OnPush` change detection strategy and therefore doesn't detect changes made to the existing array or to existing `Annotation` objects:
+
+   ```typescript
+   // ✅ Assign a new array
+   this.annotations = [...this.annotations, new Annotation(24, 32, 'Activity', '#ffc107')];
+   this.annotations = this.annotations.map((a) =>
+     a === annotation ? new Annotation(a.startIndex, a.endIndex, 'Place', a.color) : a,
+   );
+
+   // ❌ Not detected
+   this.annotations.push(new Annotation(24, 32, 'Activity', '#ffc107'));
+   annotation.label = 'Place';
+   ```
+
+5. Having set `annotationClass="my-annotation"`, a custom CSS styling can be applied by combining `::ng-deep` with the class selector `.my-annotation`, e.g., to remove the border-radius:
    ```css
    ::ng-deep .my-annotation .annotation-parent,
    ::ng-deep .my-annotation .annotation-content {
@@ -83,7 +97,7 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 
 | Input                       | Description                                                  | Type               | Default value |
 | :-------------------------- | ------------------------------------------------------------ | ------------------ | :------------ |
-| annotations                 | Represents the parts of the given text which shall be annotated. | `Annotation[]`     | `[]`          |
+| annotations                 | Represents the parts of the given text which shall be annotated. To update the annotations, assign a new array; changes to the existing array or its `Annotation` objects are not detected. | `Annotation[]`     | `[]`          |
 | annotationClass             | An optional CSS class applied to all elements which wrap the annotated parts of the given text. | `string\|undefined` | `undefined`   |
 | annotationRendererComponent | An optional Angular component that shall be used for rendering the annotation. By default, it uses the provided `NgxAnnotationRendererComponent`. You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the interface `NgxAnnotationRendererComponentInterface`. | `NgxAnnotationRendererComponentInterface` | `NgxAnnotationRendererComponent` |
 | removable                   | Determines whether annotations shall have a small button in the top right corner so that the user can remove an annotation. | `boolean`          | `true`        |
@@ -111,11 +125,11 @@ View and edit the live demo Angular app on <a href="https://codesandbox.io/s/ngx
 ### Recreate project from scratch
 
 ```bash
-npm install -g @angular/cli@^21
+npm install -g @angular/cli@^22
 ng new ngx-annotate-text-workspace
 cd ngx-annotate-text-workspace/
 ng generate library ngx-annotate-text
-ng add angular-eslint@^21
+ng add angular-eslint@^22
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text-workspace
 ng g angular-eslint:add-eslint-to-project ngx-annotate-text
 npm install prettier --save-dev
@@ -138,7 +152,10 @@ Run `ng lint` to execute ESLint.
 
 ### Running unit tests
 
-Run `ng test --watch=true --coverage --ui ngx-annotate-text` to execute the unit tests via Vitest.
+Unit tests run via Vitest:
+
+- `npm test` runs the library's tests in watch mode with a coverage report and the Vitest UI (equivalent to `ng test --watch=true --coverage --ui ngx-annotate-text`).
+- `npm run test-headless` runs the tests of both the library and the demo app once, with coverage. This is what CI runs.
 
 ### Publish library as an npm package
 

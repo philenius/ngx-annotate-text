@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 22.0.0
+
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/53
+
+- Upgrade to Angular 22.0.0
+- Components now use the Angular 22 default change detection strategy `OnPush`
+  - **Breaking change:** Annotations are no longer re-rendered when an existing `Annotation` object is changed in place (e.g. its `label` or `color`). Assign a new `annotations` array instead.
+- Fix wrong selection offsets with custom renderers that render text besides the annotation
+- Fix wrong selection offsets in texts containing emojis
+
 ## 21.0.0.
 
 Pull request: https://github.com/philenius/ngx-annotate-text/pull/46

@@ -40,7 +40,8 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    * You can implement your own annotation rendering component to customize the visualization of annotations. The custom component must implement the
    * interface `NgxAnnotationRendererComponentInterface`.
    */
-  @Input() annotationRendererComponent: Type<NgxAnnotationRendererComponentInterface> = NgxAnnotationRendererComponent;
+  @Input() annotationRendererComponent: Type<NgxAnnotationRendererComponentInterface> =
+    NgxAnnotationRendererComponent;
 
   /**
    * Determines whether annotations shall have a small button in the top right corner so that the user can
@@ -104,7 +105,10 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
    */
   public isOverlappingWithExistingAnnotations(selection: ISelection): boolean {
     const overlappingAnnotation = this.annotations.find((annotation) => {
-      return Math.max(annotation.startIndex, selection.startIndex) < Math.min(annotation.endIndex, selection.endIndex);
+      return (
+        Math.max(annotation.startIndex, selection.startIndex) <
+        Math.min(annotation.endIndex, selection.endIndex)
+      );
     });
     return overlappingAnnotation != undefined;
   }
@@ -137,16 +141,58 @@ export class NgxAnnotateTextComponent implements OnInit, OnChanges {
 
   private updateTextSelection(): void {
     const selection = window.getSelection();
-    if (selection != null && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      const preSelectionRange = range.cloneRange();
-      preSelectionRange.selectNodeContents(this.elementRef.nativeElement);
-      preSelectionRange.setEnd(range.startContainer, range.startOffset);
-      this.selectionStart = [...preSelectionRange.toString()].length;
-      this.selectionEnd = this.selectionStart + [...range.toString()].length;
+    const range = selection != null && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+    // A selection in another document or shadow root cannot be compared with this component's DOM.
+    if (
+      range &&
+      range.startContainer.getRootNode() === this.elementRef.nativeElement.getRootNode()
+    ) {
+      this.selectionStart = this.toTextIndex(range.startContainer, range.startOffset, false);
+      this.selectionEnd = this.toTextIndex(range.endContainer, range.endOffset, true);
     } else {
       this.selectionStart = undefined;
       this.selectionEnd = undefined;
     }
+  }
+
+  /**
+   * Converts a boundary point of a DOM range into an index of the text. Only the text of the tokens is counted,
+   * so any additional content rendered by the annotation renderer component (e.g. a label) is ignored. A boundary
+   * point inside an annotation snaps to the annotation's start, or to its end if `isEnd` is true. Like the indices
+   * of `Annotation`, the index counts UTF-16 code units (as `String.prototype.substring()` does), so that text with
+   * emojis is supported.
+   */
+  private toTextIndex(node: Node, offset: number, isEnd: boolean): number {
+    const boundary = document.createRange();
+    boundary.setStart(node, offset);
+    const tokenElements: Element[] = Array.from(this.elementRef.nativeElement.children);
+
+    let index = 0;
+    for (const [i, tokenElement] of tokenElements.entries()) {
+      const token = this.tokens[i];
+      const tokenLength = (token instanceof Annotation ? (token.text ?? '') : token).length;
+
+      if (tokenElement.contains(node)) {
+        const precedingRange = document.createRange();
+        precedingRange.selectNodeContents(tokenElement);
+        precedingRange.setEnd(node, offset);
+        const precedingLength = precedingRange.toString().length;
+
+        if (token instanceof Annotation) {
+          const isAtEndOfAnnotation = precedingLength >= (tokenElement.textContent ?? '').length;
+          return precedingLength > 0 && (isEnd || isAtEndOfAnnotation)
+            ? index + tokenLength
+            : index;
+        }
+        return index + precedingLength;
+      }
+
+      // Stop at the first token that does not end before the boundary point.
+      if (boundary.comparePoint(tokenElement, tokenElement.childNodes.length) >= 0) {
+        return index;
+      }
+      index += tokenLength;
+    }
+    return index;
   }
 }
