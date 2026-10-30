@@ -2,10 +2,12 @@
 
 ## 22.0.0
 
-Pull request: https://github.com/philenius/ngx-annotate-text/pull/52
+Pull request: https://github.com/philenius/ngx-annotate-text/pull/53
 
 - Upgrade to Angular 22.0.0
 - Components now use the Angular 22 default change detection strategy `OnPush`
+- Fix wrong selection offsets with custom renderers that render text besides the annotation
+- Fix wrong selection offsets in texts containing emojis
 
 ## 21.0.0.
 

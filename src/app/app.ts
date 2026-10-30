@@ -21,7 +21,7 @@ export class App {
     new Annotation(3, 11, 'Date', '#0d6efd'),
     new Annotation(36, 45, 'City', '#dc3545'),
     new Annotation(47, 52, 'Country', '#198754'),
-    new Annotation(77, 85, 'Time', '#6c757d'),
+    new Annotation(85, 93, 'Time', '#6c757d'),
   ];
 
   areAnnotationsRemovable = true;
@@ -36,7 +36,8 @@ export class App {
   selectedRendererComponent: Type<NgxAnnotationRendererComponentInterface> =
     NgxAnnotationRendererComponent;
 
-  text = 'On August 1, we went on vacation to Barcelona, Spain. Our flight took off at 11:00 am.';
+  text =
+    'On August 1, we went on vacation to Barcelona, Spain 🇪🇸. Our flight ✈️ took off at 11:00 am.';
 
   addAnnotation(label: string, color: string): void {
     if (!this.ngxAnnotateText) {
